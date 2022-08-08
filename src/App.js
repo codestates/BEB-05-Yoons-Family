@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import './App.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Button } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
