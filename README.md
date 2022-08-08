@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# NFT Exchange
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- Simple overview of use/purpose. -->
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+<!-- An in-depth paragraph about your project and overview of use. -->
 
-### `npm start`
+You can mint, trade, and collect NFTs in this website.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Dependencies
 
-### `npm test`
+<!-- * Describe any prerequisites, libraries, OS version, etc., needed before installing program. -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- node.js
 
-### `npm run build`
+### Installing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- * How/where to download your program
+* Any modifications needed to be made to files/folders -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+git clone https://github.com/codestates/BEB-05-Yoons-Family.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+cd BEB-05-Yoons-Family
 
-### `npm run eject`
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Executing program
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- * How to run the program
+* Step-by-step bullets -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm run start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<!-- ## Help
 
-## Learn More
+Any advise for common problems or issues.
+```
+command to run if program contains helper info
+``` -->
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Authors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[@thyoondev](https://github.com/thyoondev)  
+[@yoonej111](https://github.com/yoonej111)  
+[@yjjjwww](https://github.com/yjjjwww)
 
-### Code Splitting
+<!-- Contributors names and contact info
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ex. Dominique Pizzie
+ex. [@DomPizzie](https://twitter.com/dompizzie) -->
 
-### Analyzing the Bundle Size
+<!-- ## Version History
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change]() or See [release history]()
+* 0.1
+    * Initial Release -->
 
-### Making a Progressive Web App
+<!-- ## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details -->
 
-### Advanced Configuration
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<!-- Inspiration, code snippets, etc. -->
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Ant Design](https://ant.design/)
