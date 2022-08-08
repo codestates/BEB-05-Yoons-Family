@@ -65,13 +65,21 @@
     "test": "react-app-rewired test"
   },
   "eslintConfig": {
-    "env": {
-      "NODE_ENV": "development"
-    },
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "parserOptions": {
+      "babelOptions": {
+        "presets": [
+          [
+            "babel-preset-react-app",
+            false
+          ],
+          "babel-preset-react-app/prod"
+        ]
+      }
+    }
   },
   "browserslist": {
     "production": [
