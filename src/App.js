@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import './App.css';
+import 'antd/dist/antd.css';
+import { Button } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
 
@@ -67,14 +69,15 @@ function App() {
       {console.log()}
 
       {/*지갑 버튼 */}
-      <button
+      <Button
+        type="primary"
         className="metaConnect"
         onClick={() => {
           connectWallet();
         }}
       >
         connect to MetaMask
-      </button>
+      </Button>
 
       <p>{`account : ${account}`}</p>
 
