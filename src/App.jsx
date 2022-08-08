@@ -5,6 +5,15 @@ import 'antd/dist/antd.min.css';
 import { Button } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
+import { Layout } from 'antd';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import Section1 from './pages/home/Section1';
+import styled from 'styled-components';
+import { theme } from './style/theme';
+import Section2 from './pages/home/Section2';
+
+const { Content } = Layout;
 
 function App() {
   //web3 연동
@@ -62,41 +71,64 @@ function App() {
     }
   };
 
+  const ContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: ${theme.space_7};
+    margin-bottom: ${theme.space_10};
+    gap: ${theme.space_8};
+    color: ${theme.very_dark_blue_line};
+  `;
+
   return (
     <div className="App">
-      {/*상태확인*/}
-      {console.log(web3)}
-      {console.log()}
-
-      {/*지갑 버튼 */}
-      <Button
-        type="primary"
-        className="metaConnect"
-        onClick={() => {
-          connectWallet();
+      <Layout
+        className="layout"
+        style={{
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          flexBasis: '1200px',
+          background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
         }}
       >
-        connect to MetaMask
-      </Button>
-
-      <p>{`account : ${account}`}</p>
-
-      <div className="newErc721">
-        <input
-          type="text"
-          onChange={(e) => {
-            setNewErc721Addr(e.target.value); // 입력받을 때마다 newErc721addr 갱신
+        <Header />
+        <Content
+          style={{
+            padding: '0 50px',
           }}
-        ></input>
-        <button onClick={addNewErc721Token}>add new erc721</button>
-      </div>
+        >
+          <ContentWrapper className="site-layout-content">
+            <Section1 />
+            <Section2 />
+            <Section1 />
+            <Section2 />
 
-      <TokenList
-        web3={web3}
-        account={account}
-        erc721list={erc721list}
-        newErc721Addr={newErc721Addr}
-      />
+            {/* <p>{`account : ${account}`}</p>
+
+            <div className="newErc721">
+              <input
+                type="text"
+                onChange={(e) => {
+                  setNewErc721Addr(e.target.value); // 입력받을 때마다 newErc721addr 갱신
+                }}
+              />
+              <Button onClick={addNewErc721Token}>add new erc721</Button>
+            </div>
+
+            <TokenList
+              web3={web3}
+              account={account}
+              erc721list={erc721list}
+              newErc721Addr={newErc721Addr}
+            /> */}
+          </ContentWrapper>
+        </Content>
+
+        <Footer />
+      </Layout>
     </div>
   );
 }
