@@ -64,6 +64,9 @@
     "test": "react-app-rewired test"
   },
   "eslintConfig": {
+    "env": {
+      "NODE_ENV": "development"
+    },
     "extends": [
       "react-app",
       "react-app/jest"
