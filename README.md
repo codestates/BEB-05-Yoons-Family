@@ -1,5 +1,7 @@
 # NFT Exchange
 
+[![Hits](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family.svg)](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family/)
+
 <!-- Simple overview of use/purpose. -->
 
 ## Description
@@ -21,11 +23,21 @@ You can mint, trade, and collect NFTs in this website.
 <!-- * How/where to download your program
 * Any modifications needed to be made to files/folders -->
 
+1. clone this repository
+
 ```
 git clone https://github.com/codestates/BEB-05-Yoons-Family.git
+```
 
+2. change directory
+
+```
 cd BEB-05-Yoons-Family
+```
 
+3. install dependencies
+
+```
 npm install
 ```
 
