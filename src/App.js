@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import './App.css';
+import erc721Abi from './erc721Abi';
 
 function App() {
   //web3 연동
