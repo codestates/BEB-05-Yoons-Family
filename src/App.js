@@ -52,6 +52,7 @@ function App() {
 
       if (String(tokenOwner).toLowerCase() === account) {
         let tokenURI = await tokenContract.methods.tokenURI(tokenId).call();
+        setErc721list([]);
         setErc721list((prevState) => {
           return [...prevState, { name, symbol, tokenId, tokenURI }];
         });
@@ -87,7 +88,12 @@ function App() {
         <button onClick={addNewErc721Token}>add new erc721</button>
       </div>
 
-      <TokenList erc721list={erc721list} />
+      <TokenList
+        web3={web3}
+        account={account}
+        erc721list={erc721list}
+        newErc721Addr={newErc721Addr}
+      />
     </div>
   );
 }
