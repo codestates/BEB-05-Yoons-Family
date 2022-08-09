@@ -70,9 +70,9 @@ function Create() {
           </Form.Item>
           <Title level={3}>External link</Title>
           <Paragraph>
-            OpenSea will include a link to this URL on this item's detail page,
-            so that users can click to learn more about it. You are welcome to
-            link to your own webpage with more details.
+            NFT Exchange will include a link to this URL on this item's detail
+            page, so that users can click to learn more about it. You are
+            welcome to link to your own webpage with more details.
           </Paragraph>
           <Form.Item name={'external-link'}>
             <Input placeholder="http://yoursite.io/item/123" size="large" />
@@ -80,7 +80,7 @@ function Create() {
           <Title level={3}>Description</Title>
           <Paragraph>
             The description will be included on the item's detail page
-            underneath its image. Markdown syntax is supported.
+            underneath its image.
           </Paragraph>
           <Form.Item name={'description'}>
             <TextArea

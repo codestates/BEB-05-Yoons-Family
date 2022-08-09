@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import All from '../pages/explore/All';
-import Create from '../pages/home/Create';
-import Notfound from '../pages/home/Notfound';
+import Create from '../pages/create/Create';
+import Notfound from '../pages/Notfound';
 import Section1 from '../pages/home/Section1';
 import Section2 from '../pages/home/Section2';
 
