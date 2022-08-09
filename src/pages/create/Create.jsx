@@ -12,8 +12,9 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react';
+import styled from 'styled-components';
 import { theme } from '../../style/theme';
-const { Title, Paragraph } = Typography;
+const { Title: _Title, Paragraph: _Paragraph } = Typography;
 function Create() {
   const onFinish = (values) => {
     console.log('Success:', values);
@@ -140,5 +141,13 @@ function Create() {
     </Row>
   );
 }
+
+const Title = styled(_Title)`
+  color: ${theme.very_dark_blue_line} !important;
+`;
+
+const Paragraph = styled(_Paragraph)`
+  color: ${theme.very_dark_blue_line} !important;
+`;
 
 export default Create;
