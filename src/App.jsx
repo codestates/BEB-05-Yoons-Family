@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import 'antd/dist/antd.min.css';
 import Router from './router/Router';
-import { Button, Space } from 'antd';
+import { Button, notification, Space } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
 import { Layout } from 'antd';
@@ -20,6 +20,7 @@ function App() {
   const [account, setAccount] = useState('');
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
+  const [balance, setbalance] = useState('');
 
   const [collapsed, setCollapsed] = useState(true);
 
@@ -42,6 +43,24 @@ function App() {
     });
 
     setAccount(accounts[0]);
+    getBalance(accounts[0]);
+
+    !account[0] &&
+      notification.success({
+        message: 'You are successfully connected Metamask',
+        description: 'Start minting your own NFTs with NFT Exchange today!',
+        placement: 'topLeft',
+      });
+  };
+
+  //잔액조회
+
+  const getBalance = async (account) => {
+    let balanceWei = await web3.eth.getBalance(account);
+
+    let balanceETH = await web3.utils.fromWei(balanceWei, 'ether'); //eth로 단위 변경
+
+    setbalance(balanceETH);
   };
 
   //abi
@@ -84,7 +103,13 @@ function App() {
         }}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Sidebar
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          connectWallet={connectWallet}
+          account={account}
+          balance={balance}
+        />
 
         <Content
           style={{
@@ -95,11 +120,13 @@ function App() {
           }}
           className="site-layout-content"
         >
-          <Router />
+          <Router
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            account={account}
+          />
 
-          {/* <p>{`account : ${account}`}</p>
-
-            <div className="newErc721">
+          {/*  <div className="newErc721">
               <input
                 type="text"
                 onChange={(e) => {
