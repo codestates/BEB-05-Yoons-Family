@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import All from '../pages/explore/All';
+import Notfound from '../pages/home/Notfound';
 import Section1 from '../pages/home/Section1';
 import Section2 from '../pages/home/Section2';
 
 export default function Router({ collapsed, setCollapsed, account }) {
   return (
     <Routes>
+      <Route path="*" element={<Notfound />} />
       <Route
         path="/"
         element={[
