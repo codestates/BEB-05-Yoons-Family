@@ -9,6 +9,13 @@ CREATE TABLE NFT (
   PRIMARY KEY(token_id)
 );
 
+CREATE TABLE Contracts (
+  contract_address varchar(100),
+  contract_description varchar(500),
+  title varchar(100),
+  category varchar(100)
+)
+
 CREATE TABLE History (
   id INT AUTO_INCREMENT,
   token_id INT,
@@ -21,6 +28,7 @@ CREATE TABLE History (
 );
 
 ALTER TABLE History ADD FOREIGN KEY (token_id) REFERENCES NFT (token_id);
+ALTER TABLE NFT ADD FOREIGN KEY (contract_address) REFERENCES Contracts (contract_address);
 
 /* After creating database,
 * mysql -u root -p < /PATH/TO/YOUR/schema.sql -D DATABASE_NAME*/
