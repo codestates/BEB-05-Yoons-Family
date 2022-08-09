@@ -31,7 +31,7 @@ function FooterComponent() {
 const Footer = styled(_Footer)`
   display: flex;
   flex-direction: column;
-  text-align: 'center';
+  align-items: center;
 
   background-color: ${theme.very_dark_blue_main} !important;
   color: ${theme.white} !important;

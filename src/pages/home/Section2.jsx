@@ -10,7 +10,7 @@ function Section2() {
   return (
     <Row justify="center" align="middle">
       <Col flex="0 1 1000px">
-        <Title>Get Your NFT</Title>
+        <Title style={{ textAlign: 'center' }}>Get Your NFT</Title>
         <Row gutter={[16, 16]}>
           {new Array(8).fill(null).map((_, idx) => {
             return (

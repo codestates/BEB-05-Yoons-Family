@@ -6,7 +6,7 @@ import { theme } from '../../style/theme';
 function Section1() {
   return (
     <Row gutter={[48, 48]} justify="center" align="middle" wrap={true}>
-      <Col flex="0 1 500px">
+      <Col flex="0 1 500px" style={{ textAlign: 'center' }}>
         <Title>NFT Exchange</Title>
         <Explain>Unleash your creativity</Explain>
         <Content>

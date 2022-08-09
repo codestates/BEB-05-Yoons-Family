@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import './App.css';
 import 'antd/dist/antd.min.css';
 import Router from './router/Router';
 import { Button, Space } from 'antd';
@@ -10,6 +9,8 @@ import { Layout } from 'antd';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import { theme } from './style/theme';
+import Sider from 'antd/lib/layout/Sider';
+import Sidebar from './components/layout/Sidebar';
 
 const { Content } = Layout;
 
@@ -19,6 +20,8 @@ function App() {
   const [account, setAccount] = useState('');
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
+
+  const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
     if (typeof window.ethereum !== 'undefined') {
@@ -80,13 +83,15 @@ function App() {
           gap: `${theme.space_8}`,
         }}
       >
-        <Header />
+        <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+
         <Content
           style={{
             padding: '0 50px',
             display: 'flex',
             flexDirection: 'column',
-            gap: `${theme.space_8}`,
+            gap: `${theme.space_9}`,
           }}
           className="site-layout-content"
         >

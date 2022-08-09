@@ -1,5 +1,5 @@
 import { Layout, Menu as _Menu, Row, Col } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   AppstoreOutlined,
@@ -8,15 +8,15 @@ import {
   HighlightOutlined,
   RiseOutlined,
   SlidersOutlined,
+  UserOutlined,
+  WalletOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
 import { default as _Search } from 'antd/lib/input/Search';
-import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
 
 const { Header: _Header } = Layout;
-
-function HeaderComponent() {
+function HeaderComponent({ collapsed, setCollapsed }) {
   let navigate = useNavigate();
 
   const items = [
@@ -79,19 +79,11 @@ function HeaderComponent() {
       ],
     },
     { label: 'Create', key: 'create' },
+    { label: <UserOutlined />, key: 'mypage' },
     {
-      label: 'Connet Wallet',
+      label: <WalletOutlined />,
       key: 'wallet',
-      icon: (
-        <MetamaskIcon
-          style={{
-            width: `${theme.fs_4}`,
-            verticalAlign: '-0.125em',
-            display: 'inline-block',
-          }}
-        />
-      ),
-      onClick: () => alert('wallet!'),
+      onClick: () => setCollapsed(!collapsed),
     },
   ];
 
@@ -100,7 +92,7 @@ function HeaderComponent() {
   return (
     <Header>
       <Row justify="space-between" align="middle">
-        <Col flex="0 1 200px">
+        <Col flex="0 1 20%">
           <Link to="/">
             <LogoWrapper>
               <LogoImg
@@ -111,7 +103,7 @@ function HeaderComponent() {
             </LogoWrapper>
           </Link>
         </Col>
-        <Col flex="0 1 900px">
+        <Col flex="0 1 55%">
           <Search
             placeholder="Search items, collections, and accounts"
             allowClear
@@ -119,15 +111,8 @@ function HeaderComponent() {
             onSearch={onSearch}
           />
         </Col>
-        <Col flex="0 1 500px">
-          <Menu
-            style={{
-              backgroundColor: `${theme.very_light_blue_main}`,
-              color: `${theme.very_dark_blue_sub}`,
-            }}
-            mode="horizontal"
-            items={items}
-          />
+        <Col flex="0 0 25%">
+          <Menu mode="horizontal" items={items} />
         </Col>
       </Row>
     </Header>
@@ -135,9 +120,19 @@ function HeaderComponent() {
 }
 
 const Header = styled(_Header)`
-  margin-top: 15px;
   background-color: ${theme.very_light_blue_main};
-  color: ${theme.very_dark_blue_sub};
+  padding-top: 15px;
+  padding-bottom: 70px;
+  color: ${theme.very_dark_blue_line};
+  z-index: 1000;
+
+  a:link,
+  a:visited,
+  a:active,
+  a:hover {
+    text-decoration: none;
+    color: ${theme.very_dark_blue_line};
+  }
 `;
 
 const Search = styled(_Search)`
@@ -147,6 +142,8 @@ const Search = styled(_Search)`
   }
 `;
 const Menu = styled(_Menu)`
+  background-color: ${theme.very_light_blue_main};
+  color: ${theme.very_dark_blue_line};
   ${theme.tablet && theme.mobile} {
     display: none;
   }
