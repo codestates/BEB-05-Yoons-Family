@@ -3,16 +3,13 @@ import Web3 from 'web3';
 import './App.css';
 import 'antd/dist/antd.min.css';
 import Router from './router/Router';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
 import { Layout } from 'antd';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Section1 from './pages/home/Section1';
-import styled from 'styled-components';
 import { theme } from './style/theme';
-import Section2 from './pages/home/Section2';
 
 const { Content } = Layout;
 
@@ -78,22 +75,24 @@ function App() {
         className="layout"
         style={{
           height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          flexBasis: '1200px',
           background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
+          color: `${theme.very_dark_blue_line}`,
+          gap: `${theme.space_8}`,
         }}
       >
         <Header />
         <Content
           style={{
             padding: '0 50px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: `${theme.space_8}`,
           }}
+          className="site-layout-content"
         >
-          <ContentWrapper className="site-layout-content">
-            <Router />
+          <Router />
 
-            {/* <p>{`account : ${account}`}</p>
+          {/* <p>{`account : ${account}`}</p>
 
             <div className="newErc721">
               <input
@@ -111,7 +110,7 @@ function App() {
               erc721list={erc721list}
               newErc721Addr={newErc721Addr}
             /> */}
-          </ContentWrapper>
+          {/* </ContentWrapper> */}
         </Content>
 
         <Footer />
@@ -119,16 +118,5 @@ function App() {
     </div>
   );
 }
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: ${theme.space_7};
-  margin-bottom: ${theme.space_10};
-  gap: ${theme.space_8};
-  color: ${theme.very_dark_blue_line};
-`;
 
 export default App;

@@ -1,4 +1,4 @@
-import { Layout, Menu } from 'antd';
+import { Layout, Menu as _Menu, Row, Col } from 'antd';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
-import Search from 'antd/lib/input/Search';
+import { default as _Search } from 'antd/lib/input/Search';
 import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
 
 const { Header: _Header } = Layout;
@@ -98,41 +98,58 @@ function HeaderComponent() {
   //검색
   const onSearch = (value) => console.log(value);
   return (
-    <Header style={{ backgroundColor: `${theme.very_light_blue_main}` }}>
-      <Link to="/">
-        <LogoWrapper>
-          <LogoImg src={require('../../asset/icons/ethereum.png')} alt="logo" />
-          <LogoTitle> NFT Exchange</LogoTitle>
-        </LogoWrapper>
-      </Link>
-      <Search
-        placeholder="Search items, collections, and accounts"
-        allowClear
-        size="large"
-        onSearch={onSearch}
-        style={{ width: 800 }}
-      />
-      <Menu
-        style={{
-          minWidth: 500,
-          backgroundColor: `${theme.very_light_blue_main}`,
-          color: `${theme.very_dark_blue_sub}`,
-        }}
-        mode="horizontal"
-        items={items}
-      />
+    <Header>
+      <Row justify="space-between" align="middle">
+        <Col flex="0 1 200px">
+          <Link to="/">
+            <LogoWrapper>
+              <LogoImg
+                src={require('../../asset/icons/ethereum.png')}
+                alt="logo"
+              />
+              <LogoTitle> NFT Exchange</LogoTitle>
+            </LogoWrapper>
+          </Link>
+        </Col>
+        <Col flex="0 1 900px">
+          <Search
+            placeholder="Search items, collections, and accounts"
+            allowClear
+            size="large"
+            onSearch={onSearch}
+          />
+        </Col>
+        <Col flex="0 1 500px">
+          <Menu
+            style={{
+              backgroundColor: `${theme.very_light_blue_main}`,
+              color: `${theme.very_dark_blue_sub}`,
+            }}
+            mode="horizontal"
+            items={items}
+          />
+        </Col>
+      </Row>
     </Header>
   );
 }
 
 const Header = styled(_Header)`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  gap: ${theme.space_3};
+  margin-top: 15px;
+  background-color: ${theme.very_light_blue_main};
   color: ${theme.very_dark_blue_sub};
+`;
+
+const Search = styled(_Search)`
+  margin-top: 15px;
+  ${theme.mobile} {
+    display: none;
+  }
+`;
+const Menu = styled(_Menu)`
+  ${theme.tablet && theme.mobile} {
+    display: none;
+  }
 `;
 
 const LogoWrapper = styled.div`
@@ -153,6 +170,10 @@ const LogoTitle = styled.span`
   font-weight: ${theme.fw_700};
   letter-spacing: -1px;
   white-space: nowrap;
+
+  /* ${theme.mobile} {
+    display: none;
+  } */
 `;
 
 export default HeaderComponent;

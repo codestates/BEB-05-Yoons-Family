@@ -1,4 +1,8 @@
 export const theme = {
+  mobile: '@media all and (max-width: 480px)',
+  tablet: '@media all and (min-width:480px) and (max-width:1200px)',
+  laptop: '@media all and (min-width: 1200px)',
+
   /* Colors */
   cyan: 'hsl(178, 100%, 50%)',
   soft_blue: 'hsl(215, 51%, 70%)',
