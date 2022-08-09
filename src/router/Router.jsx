@@ -1,12 +1,16 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import All from '../pages/explore/All';
+import Create from '../pages/create/Create';
+import Notfound from '../pages/Notfound';
 import Section1 from '../pages/home/Section1';
 import Section2 from '../pages/home/Section2';
+import Explore from '../pages/explore/Explore';
+import Section3 from '../pages/home/Section3';
 
 export default function Router({ collapsed, setCollapsed, account }) {
   return (
     <Routes>
+      <Route path="*" element={<Notfound />} />
       <Route
         path="/"
         element={[
@@ -15,11 +19,15 @@ export default function Router({ collapsed, setCollapsed, account }) {
             setCollapsed={setCollapsed}
             account={account}
           />,
-          <Section2 />,
+          <Section3 />,
           <Section2 />,
         ]}
       />
-      <Route path="/assets" element={<All />} />
+      <Route path="/assets" element={<Explore />} />
+      <Route path="/assets/all" element={<Explore />} />
+      <Route path="/assets/art" element={<Explore />} />
+      <Route path="/assets/collectibles" element={<Explore />} />
+      <Route path="/assets/create" element={<Create />} />
     </Routes>
   );
 }

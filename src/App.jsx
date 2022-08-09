@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import 'antd/dist/antd.min.css';
 import Router from './router/Router';
-import { Button, notification, Space } from 'antd';
+import { notification } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
 import { Layout } from 'antd';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import { theme } from './style/theme';
-import Sider from 'antd/lib/layout/Sider';
 import Sidebar from './components/layout/Sidebar';
 
 const { Content } = Layout;
@@ -99,7 +98,7 @@ function App() {
           height: '100%',
           background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
           color: `${theme.very_dark_blue_line}`,
-          gap: `${theme.space_8}`,
+          gap: `${theme.space_7}`,
         }}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />

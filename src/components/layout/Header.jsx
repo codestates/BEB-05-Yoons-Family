@@ -78,7 +78,11 @@ function HeaderComponent({ collapsed, setCollapsed }) {
         },
       ],
     },
-    { label: 'Create', key: 'create' },
+    {
+      label: 'Create',
+      key: 'create',
+      onClick: () => navigate('/assets/create'),
+    },
     { label: <UserOutlined />, key: 'mypage' },
     {
       label: <WalletOutlined />,
