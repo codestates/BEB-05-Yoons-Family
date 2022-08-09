@@ -9,12 +9,12 @@ const { Meta } = Card;
 function Section2() {
   return (
     <Row justify="center" align="middle">
-      <Col flex="0 1 1000px">
+      <Col flex="0 1 800px">
         <Title style={{ textAlign: 'center' }}>Get Your NFT</Title>
         <Row gutter={[16, 16]}>
           {new Array(8).fill(null).map((_, idx) => {
             return (
-              <Col flex="1 1 220px" key={idx + 1}>
+              <Col flex="1 1 200px" key={idx + 1}>
                 <Card
                   key={idx + 1}
                   hoverable
