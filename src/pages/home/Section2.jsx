@@ -6,31 +6,6 @@ import { ReactComponent as EthereumIcon } from '../../asset/icons/ethereum-eth-l
 
 const { Meta } = Card;
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1200px;
-  padding: ${theme.space_4};
-  gap: ${theme.space_4};
-  flex-wrap: wrap;
-
-  /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); */
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: ${theme.space_4};
-  justify-content: center;
-`;
-
-const Title = styled.p`
-  font-size: ${theme.fs_10};
-  font-weight: ${theme.fw_700};
-`;
-
 function Section2() {
   return (
     <Wrapper>
@@ -82,5 +57,30 @@ function Section2() {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  padding: ${theme.space_4};
+  gap: ${theme.space_4};
+  flex-wrap: wrap;
+
+  /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); */
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: ${theme.space_4};
+  justify-content: center;
+`;
+
+const Title = styled.p`
+  font-size: ${theme.fs_10};
+  font-weight: ${theme.fw_700};
+`;
 
 export default Section2;

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import './App.css';
 import 'antd/dist/antd.min.css';
+import Router from './router/Router';
 import { Button } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
@@ -71,17 +72,6 @@ function App() {
     }
   };
 
-  const ContentWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: ${theme.space_7};
-    margin-bottom: ${theme.space_10};
-    gap: ${theme.space_8};
-    color: ${theme.very_dark_blue_line};
-  `;
-
   return (
     <div className="App">
       <Layout
@@ -101,10 +91,7 @@ function App() {
           }}
         >
           <ContentWrapper className="site-layout-content">
-            <Section1 />
-            <Section2 />
-            <Section1 />
-            <Section2 />
+            <Router />
 
             {/* <p>{`account : ${account}`}</p>
 
@@ -132,5 +119,16 @@ function App() {
     </div>
   );
 }
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: ${theme.space_7};
+  margin-bottom: ${theme.space_10};
+  gap: ${theme.space_8};
+  color: ${theme.very_dark_blue_line};
+`;
 
 export default App;
