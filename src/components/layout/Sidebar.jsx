@@ -1,4 +1,8 @@
-import { MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CloseOutlined,
+  MenuUnfoldOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import Sider from 'antd/lib/layout/Sider';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,6 +13,7 @@ import {
   Card,
   Col,
   List as _List,
+  message,
   Row,
   Tooltip,
   Typography,
@@ -16,7 +21,7 @@ import {
 
 const { Text } = Typography;
 
-function Sidebar({ collapsed, setCollapsed, connectWallet }) {
+function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
   return (
     <Sider
       breakpoint={'xl'}
@@ -40,7 +45,7 @@ function Sidebar({ collapsed, setCollapsed, connectWallet }) {
     >
       {/* 닫기버튼 */}
       <CloseButton onClick={() => setCollapsed(!collapsed)}>
-        <MenuUnfoldOutlined
+        <CloseOutlined
           style={{
             padding: '2px',
             color: `${theme.white}`,
@@ -54,147 +59,158 @@ function Sidebar({ collapsed, setCollapsed, connectWallet }) {
         {/* <MetamaskIcon></MetamaskIcon> */}
 
         {/* 미로그인 상태 */}
-        <Row gutter={[48, 48]}>
-          <Col span={22} offset={1}>
-            <div
-              style={{
-                height: '80px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: `1px solid ${theme.very_light_blue_main}`,
-              }}
-            >
+        {account === '' ? (
+          <Row gutter={[48, 48]}>
+            <Col span={22} offset={1}>
               <div
                 style={{
+                  height: '80px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: `${theme.space_2}`,
+                  borderBottom: `1px solid ${theme.very_light_blue_main}`,
                 }}
               >
-                <Avatar icon={<UserOutlined />} />
-                <Text
+                <div
                   style={{
-                    color: `${theme.very_light_blue_main}`,
-                    fontSize: `${theme.fs_8}`,
-                    fontWeight: `${theme.fw_500}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: `${theme.space_2}`,
                   }}
                 >
-                  My Wallet
-                </Text>
+                  <Avatar icon={<UserOutlined />} />
+                  <Text
+                    style={{
+                      color: `${theme.very_light_blue_main}`,
+                      fontSize: `${theme.fs_8}`,
+                      fontWeight: `${theme.fw_500}`,
+                    }}
+                  >
+                    My Wallet
+                  </Text>
+                </div>
               </div>
-            </div>
-            <p
-              style={{
-                fontSize: `${theme.fs_5}`,
-                color: `${theme.soft_blue}`,
-                lineHeight: 1,
-                marginTop: '20px',
-              }}
-            >
-              If you don't have a
-              <Tooltip
-                placement="bottom"
-                title={
-                  'A crypto wallet is an application or hardware device that allows individuals to store and retrieve digital items.'
-                }
-              >
-                &nbsp;
-                <span
-                  style={{
-                    color: `${theme.cyan}`,
-                    fontWeight: `${theme.fw_500}`,
-                  }}
-                >
-                  wallet
-                </span>
-                &nbsp;
-              </Tooltip>
-              yet, you can select a provider and create one now.
-            </p>
-            <List
-              size="large"
-              header={<div>Choose Your Wallet</div>}
-              //   footer={<div>Coming Soon More Wallet Support...</div>}
-              bordered
-              dataSource={['Meta Mask']}
-              renderItem={(item) => (
-                <WalletList>
-                  <MetamaskIcon width={`${theme.fs_5}`} />
-                  &nbsp;
-                  {item}
-                </WalletList>
-              )}
-            />
-          </Col>
-        </Row>
-
-        {/* 로그인 상태 */}
-        {/* <Row gutter={[48, 48]}>
-          <Col span={22} offset={1}>
-            <div
-              style={{
-                height: '80px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: `1px solid ${theme.very_light_blue_main}`,
-              }}
-            >
-              <div
+              <p
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: `${theme.space_2}`,
-                }}
-              >
-                <Avatar src="https://joeschmoe.io/api/v1/random" />
-                <Text
-                  style={{
-                    color: `${theme.very_light_blue_main}`,
-                    fontSize: `${theme.fs_8}`,
-                    fontWeight: `${theme.fw_500}`,
-                  }}
-                >
-                  NEO
-                </Text>
-              </div>
-              <Text
-                style={{
+                  fontSize: `${theme.fs_5}`,
                   color: `${theme.soft_blue}`,
-                  fontSize: `${theme.fs_6}`,
-                  fontWeight: `${theme.fw_500}`,
+                  lineHeight: 1,
+                  marginTop: '20px',
                 }}
               >
-                0x5A26...Dd9e
-              </Text>
-            </div>
-            <Card
-              title={'Total balance'}
-              headStyle={{
-                color: `${theme.soft_blue}`,
-                display: 'block',
-                textAlign: 'center',
-                borderColor: `${theme.very_dark_blue_line}`,
-              }}
-              bodyStyle={{
-                color: `${theme.cyan}`,
-                textAlign: 'center',
-                fontSize: `${theme.fs_12}`,
-              }}
-              style={{
-                margin: '20px 0px 20px 0px',
-                width: 360,
-                backgroundColor: `${theme.very_dark_blue_main}`,
-                borderColor: `${theme.very_dark_blue_line}`,
-              }}
-            >
-              <p>12.23 ETH</p>
-            </Card>
-          </Col>
-        </Row> */}
+                If you don't have a
+                <Tooltip
+                  placement="bottom"
+                  title={
+                    'A crypto wallet is an application or hardware device that allows individuals to store and retrieve digital items.'
+                  }
+                >
+                  &nbsp;
+                  <span
+                    style={{
+                      color: `${theme.cyan}`,
+                      fontWeight: `${theme.fw_500}`,
+                    }}
+                  >
+                    wallet
+                  </span>
+                  &nbsp;
+                </Tooltip>
+                yet, you can select a provider and create one now.
+              </p>
+              <List
+                size="large"
+                header={<div>Choose Your Wallet</div>}
+                //   footer={<div>Coming Soon More Wallet Support...</div>}
+                bordered
+                dataSource={['Meta Mask']}
+                renderItem={(item) => (
+                  <WalletList onClick={connectWallet}>
+                    <MetamaskIcon width={`${theme.fs_5}`} />
+                    &nbsp;
+                    {item}
+                  </WalletList>
+                )}
+              />
+            </Col>
+          </Row>
+        ) : (
+          <Row gutter={[48, 48]}>
+            <Col span={22} offset={1}>
+              <div
+                style={{
+                  height: '80px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottom: `1px solid ${theme.very_light_blue_main}`,
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: `${theme.space_2}`,
+                  }}
+                >
+                  <Avatar src="https://joeschmoe.io/api/v1/random" />
+                  <Text
+                    style={{
+                      color: `${theme.very_light_blue_main}`,
+                      fontSize: `${theme.fs_8}`,
+                      fontWeight: `${theme.fw_500}`,
+                    }}
+                  >
+                    NEO
+                  </Text>
+                </div>
+                <Tooltip placement="top" title={'COPY'}>
+                  <Text
+                    onClick={() => {
+                      navigator.clipboard.writeText(account);
+                      message.success('Copied!');
+                    }}
+                    style={{
+                      color: `${theme.soft_blue}`,
+                      fontSize: `${theme.fs_5}`,
+                      fontWeight: `${theme.fw_500}`,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {account.length > 10 &&
+                      account.substr(0, 6) +
+                        '...' +
+                        account.substr(account.length - 4, account.length)}
+                  </Text>
+                </Tooltip>
+              </div>
+              <Card
+                title={'Total balance'}
+                headStyle={{
+                  color: `${theme.soft_blue}`,
+                  display: 'block',
+                  textAlign: 'center',
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+                bodyStyle={{
+                  color: `${theme.cyan}`,
+                  textAlign: 'center',
+                  fontSize: `${theme.fs_12}`,
+                }}
+                style={{
+                  margin: '20px 0px 20px 0px',
+                  width: 360,
+                  backgroundColor: `${theme.very_dark_blue_main}`,
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+              >
+                <p>{Number(balance).toFixed(4)} ETH</p>
+              </Card>
+            </Col>
+          </Row>
+        )}
       </SidebarWrapper>
     </Sider>
   );

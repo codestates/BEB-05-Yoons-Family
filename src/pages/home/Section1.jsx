@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
 
-function Section1({ collapsed, setCollapsed }) {
+function Section1({ collapsed, setCollapsed, account }) {
   return (
     <Row gutter={[48, 48]} justify="center" align="middle" wrap={true}>
       <Col flex="0 1 500px" style={{ textAlign: 'center' }}>
@@ -22,13 +22,15 @@ function Section1({ collapsed, setCollapsed }) {
           사용자는 몇 번의 클릭만으로 자신의 NFT를 만들 수 있습니다!
           <br /> 지금 NFT Exchange로 자신만의 NFT를 발행하세요!
         </Content> */}
-        <Row justify="center">
-          <Col flex="auto">
-            <Button type="primary" onClick={() => setCollapsed(!collapsed)}>
-              {collapsed ? 'Connet Wallet' : 'Close Sidebar'}
-            </Button>
-          </Col>
-        </Row>
+        {!account && (
+          <Row justify="center">
+            <Col flex="auto">
+              <Button type="primary" onClick={() => setCollapsed(!collapsed)}>
+                {collapsed ? 'Connet Wallet' : 'Close Sidebar'}
+              </Button>
+            </Col>
+          </Row>
+        )}
       </Col>
       <Col flex=" 0 1 500px">
         <Image
