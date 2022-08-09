@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import './App.css';
 import 'antd/dist/antd.min.css';
-import { Button } from 'antd';
+import Router from './router/Router';
+import { Button, notification, Space } from 'antd';
 import erc721Abi from './erc721Abi';
 import TokenList from './components/TokenList';
 import { Layout } from 'antd';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import Section1 from './pages/home/Section1';
-import styled from 'styled-components';
 import { theme } from './style/theme';
-import Section2 from './pages/home/Section2';
+import Sider from 'antd/lib/layout/Sider';
+import Sidebar from './components/layout/Sidebar';
 
 const { Content } = Layout;
 
@@ -21,6 +20,9 @@ function App() {
   const [account, setAccount] = useState('');
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
+  const [balance, setbalance] = useState('');
+
+  const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
     if (typeof window.ethereum !== 'undefined') {
@@ -41,6 +43,24 @@ function App() {
     });
 
     setAccount(accounts[0]);
+    getBalance(accounts[0]);
+
+    !account[0] &&
+      notification.success({
+        message: 'You are successfully connected Metamask',
+        description: 'Start minting your own NFTs with NFT Exchange today!',
+        placement: 'topLeft',
+      });
+  };
+
+  //잔액조회
+
+  const getBalance = async (account) => {
+    let balanceWei = await web3.eth.getBalance(account);
+
+    let balanceETH = await web3.utils.fromWei(balanceWei, 'ether'); //eth로 단위 변경
+
+    setbalance(balanceETH);
   };
 
   //abi
@@ -71,44 +91,42 @@ function App() {
     }
   };
 
-  const ContentWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: ${theme.space_7};
-    margin-bottom: ${theme.space_10};
-    gap: ${theme.space_8};
-    color: ${theme.very_dark_blue_line};
-  `;
-
   return (
     <div className="App">
       <Layout
         className="layout"
         style={{
           height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          flexBasis: '1200px',
           background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
+          color: `${theme.very_dark_blue_line}`,
+          gap: `${theme.space_8}`,
         }}
       >
-        <Header />
+        <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Sidebar
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          connectWallet={connectWallet}
+          account={account}
+          balance={balance}
+        />
+
         <Content
           style={{
             padding: '0 50px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: `${theme.space_9}`,
           }}
+          className="site-layout-content"
         >
-          <ContentWrapper className="site-layout-content">
-            <Section1 />
-            <Section2 />
-            <Section1 />
-            <Section2 />
+          <Router
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            account={account}
+          />
 
-            {/* <p>{`account : ${account}`}</p>
-
-            <div className="newErc721">
+          {/*  <div className="newErc721">
               <input
                 type="text"
                 onChange={(e) => {
@@ -124,7 +142,7 @@ function App() {
               erc721list={erc721list}
               newErc721Addr={newErc721Addr}
             /> */}
-          </ContentWrapper>
+          {/* </ContentWrapper> */}
         </Content>
 
         <Footer />
