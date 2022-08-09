@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
 
-function Section1() {
+function Section1({ collapsed, setCollapsed }) {
   return (
     <Row gutter={[48, 48]} justify="center" align="middle" wrap={true}>
       <Col flex="0 1 500px" style={{ textAlign: 'center' }}>
@@ -24,7 +24,9 @@ function Section1() {
         </Content> */}
         <Row justify="center">
           <Col flex="auto">
-            <Button type="primary">Connet Wallet</Button>
+            <Button type="primary" onClick={() => setCollapsed(!collapsed)}>
+              {collapsed ? 'Connet Wallet' : 'Close Sidebar'}
+            </Button>
           </Col>
         </Row>
       </Col>

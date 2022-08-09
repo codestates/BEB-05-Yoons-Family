@@ -4,11 +4,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
 import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
-import { Avatar, Card, Col, List, Row, Tooltip, Typography } from 'antd';
+import {
+  Avatar,
+  Card,
+  Col,
+  List as _List,
+  Row,
+  Tooltip,
+  Typography,
+} from 'antd';
 
 const { Text } = Typography;
 
-function Sidebar({ collapsed, setCollapsed }) {
+function Sidebar({ collapsed, setCollapsed, connectWallet }) {
   return (
     <Sider
       breakpoint={'xl'}
@@ -79,7 +87,7 @@ function Sidebar({ collapsed, setCollapsed }) {
             </div>
             <p
               style={{
-                fontSize: `${theme.fs_6}`,
+                fontSize: `${theme.fs_5}`,
                 color: `${theme.soft_blue}`,
                 lineHeight: 1,
                 marginTop: '20px',
@@ -118,13 +126,6 @@ function Sidebar({ collapsed, setCollapsed }) {
                   {item}
                 </WalletList>
               )}
-              style={{
-                margin: '20px 0px 20px 0px',
-                width: 360,
-                backgroundColor: `${theme.very_dark_blue_main}`,
-                borderColor: `${theme.very_dark_blue_line}`,
-                color: `${theme.soft_blue}`,
-              }}
             />
           </Col>
         </Row>
@@ -214,6 +215,18 @@ const CloseButton = styled.div`
   }
 `;
 
+const List = styled(_List)`
+  margin: 20px 0px 20px 0px;
+  width: 360;
+  background-color: ${theme.very_dark_blue_main};
+  border-color: ${theme.very_dark_blue_line};
+  color: ${theme.soft_blue};
+
+  .ant-list-header {
+    border-bottom: 1px solid ${theme.very_dark_blue_line} !important;
+  }
+`;
+
 const WalletList = styled(List.Item)`
   border-color: ${theme.very_dark_blue_line};
   color: ${theme.soft_blue};
@@ -224,6 +237,9 @@ const WalletList = styled(List.Item)`
   :hover,
   :active {
     box-shadow: 0px 0px 1px 3px rgba(0, 255, 247, 0.5);
+  }
+  :active {
+    background-color: ${theme.very_dark_blue_line};
   }
 `;
 

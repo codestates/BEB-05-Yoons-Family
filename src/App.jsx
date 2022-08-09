@@ -84,7 +84,11 @@ function App() {
         }}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Sidebar
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
+          connectWallet={connectWallet}
+        />
 
         <Content
           style={{
@@ -95,7 +99,7 @@ function App() {
           }}
           className="site-layout-content"
         >
-          <Router />
+          <Router collapsed={collapsed} setCollapsed={setCollapsed} />
 
           {/* <p>{`account : ${account}`}</p>
 
