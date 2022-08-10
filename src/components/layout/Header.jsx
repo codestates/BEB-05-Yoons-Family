@@ -19,84 +19,12 @@ const { Header: _Header } = Layout;
 function HeaderComponent({ collapsed, setCollapsed }) {
   let navigate = useNavigate();
 
-  const items = [
-    {
-      label: 'Explore',
-      key: 'explore',
-      children: [
-        {
-          label: 'All NFTs',
-          key: 'explore-all-nfts',
-          icon: <AppstoreOutlined />,
-          onClick: () => navigate('/assets'),
-        },
-        {
-          label: 'Art',
-          key: 'explore-art',
-          icon: <HighlightOutlined />,
-          onClick: () => alert('Art'),
-        },
-        {
-          label: 'Collectibles',
-          key: 'explore-collectibles',
-          icon: <BankOutlined />,
-          onClick: () => alert('Collectibles'),
-        },
-      ],
-    },
-    {
-      label: 'Stats',
-      key: 'stats',
-      children: [
-        {
-          label: 'Rankings',
-          key: 'stats-rankings',
-          icon: <RiseOutlined />,
-          onClick: () => alert('rankings'),
-        },
-        {
-          label: 'Activity',
-          key: 'stats-activity',
-          icon: <SlidersOutlined />,
-          onClick: () => alert('activity'),
-        },
-      ],
-    },
-    {
-      label: 'Resources',
-      key: 'resources',
-      children: [
-        {
-          label: 'GitHub Repository',
-          key: 'resources-gitHub-repository',
-          icon: <GithubOutlined />,
-          onClick: () =>
-            window.open(
-              'https://github.com/codestates/BEB-05-Yoons-Family',
-              '_blank'
-            ),
-        },
-      ],
-    },
-    {
-      label: 'Create',
-      key: 'create',
-      onClick: () => navigate('/assets/create'),
-    },
-    { label: <UserOutlined />, key: 'mypage' },
-    {
-      label: <WalletOutlined />,
-      key: 'wallet',
-      onClick: () => setCollapsed(!collapsed),
-    },
-  ];
-
   //검색
   const onSearch = (value) => console.log(value);
   return (
     <Header>
-      <Row justify="space-between" align="middle">
-        <Col flex="0 1 20%">
+      <Row justify="space-between" wrap={false}>
+        <Col flex={`0 0 11rem`}>
           <Link to="/">
             <LogoWrapper>
               <LogoImg
@@ -107,7 +35,7 @@ function HeaderComponent({ collapsed, setCollapsed }) {
             </LogoWrapper>
           </Link>
         </Col>
-        <Col flex="0 1 55%">
+        <Col flex={`1 5 100px`}>
           <Search
             placeholder="Search items, collections, and accounts"
             allowClear
@@ -115,8 +43,63 @@ function HeaderComponent({ collapsed, setCollapsed }) {
             onSearch={onSearch}
           />
         </Col>
-        <Col flex="0 0 25%">
-          <Menu mode="horizontal" items={items} />
+        <Col flex={'0 2 28rem'}>
+          <Menu mode="horizontal">
+            <Menu.SubMenu key="explore" title="Explore">
+              <Menu.Item
+                key="explore-all-nfts"
+                icon={<AppstoreOutlined />}
+                onClick={() => navigate('/assets')}
+              >
+                All NFTs
+              </Menu.Item>
+              <Menu.Item
+                key="explore-art"
+                icon={<HighlightOutlined />}
+                onClick={() => navigate('/assets/art')}
+              >
+                Art
+              </Menu.Item>
+              <Menu.Item
+                key="explore-collectibles"
+                icon={<BankOutlined />}
+                onClick={() => navigate('/assets/collectibles')}
+              >
+                Collectibles
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu key="stats" title="Stats">
+              <Menu.Item key="stats-rankings" icon={<RiseOutlined />}>
+                Rankings
+              </Menu.Item>
+              <Menu.Item key="stats-activity" icon={<SlidersOutlined />}>
+                Activity
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu key="resources" title="Resources">
+              <Menu.Item
+                key="resources-gitHub-repository"
+                icon={<GithubOutlined />}
+                onClick={() =>
+                  window.open(
+                    'https://github.com/codestates/BEB-05-Yoons-Family',
+                    '_blank'
+                  )
+                }
+              >
+                GitHub Repository
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.Item key="create" onClick={() => navigate('/assets/create')}>
+              Create
+            </Menu.Item>
+            <Menu.Item key="mypage" onClick={() => {}}>
+              <UserOutlined />
+            </Menu.Item>
+            <Menu.Item key="wallet" onClick={() => setCollapsed(!collapsed)}>
+              <WalletOutlined />
+            </Menu.Item>
+          </Menu>
         </Col>
       </Row>
     </Header>
@@ -125,8 +108,6 @@ function HeaderComponent({ collapsed, setCollapsed }) {
 
 const Header = styled(_Header)`
   background-color: ${theme.very_light_blue_main};
-  padding-top: 15px;
-  padding-bottom: 70px;
   color: ${theme.very_dark_blue_line};
   z-index: 1000;
 
@@ -141,29 +122,30 @@ const Header = styled(_Header)`
 
 const Search = styled(_Search)`
   margin-top: 15px;
+
   ${theme.mobile} {
+    display: none;
+  }
+  ${theme.tablet} {
     display: none;
   }
 `;
 const Menu = styled(_Menu)`
   background-color: ${theme.very_light_blue_main};
   color: ${theme.very_dark_blue_line};
-  ${theme.tablet && theme.mobile} {
-    display: none;
-  }
 `;
 
 const LogoWrapper = styled.div`
   display: flex;
-  flex-shrink: 0;
   flex-wrap: nowrap;
   align-items: center;
-  gap: ${theme.space_1};
   cursor: pointer;
 `;
 
 const LogoImg = styled.img`
+  display: inline-block;
   width: ${theme.fs_13};
+  height: ${theme.fs_13};
 `;
 
 const LogoTitle = styled.span`
@@ -172,7 +154,7 @@ const LogoTitle = styled.span`
   letter-spacing: -1px;
   white-space: nowrap;
 
-  /* ${theme.mobile} {
+  /* ${theme.mobile || theme.tablet} {
     display: none;
   } */
 `;
