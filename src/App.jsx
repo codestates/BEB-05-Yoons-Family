@@ -1,31 +1,39 @@
-import { useEffect, useState } from 'react';
-import Web3 from 'web3';
-import 'antd/dist/antd.min.css';
-import Router from './router/Router';
-import { Button, notification, Space } from 'antd';
-import erc721Abi from './erc721Abi';
-import TokenList from './components/TokenList';
-import { Layout } from 'antd';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import { theme } from './style/theme';
-import Sider from 'antd/lib/layout/Sider';
-import Sidebar from './components/layout/Sidebar';
+import { useEffect, useState } from "react";
+import Web3 from "web3";
+import "antd/dist/antd.min.css";
+import Router from "./router/Router";
+import { Button, notification, Space } from "antd";
+import erc721Abi from "./erc721Abi";
+import TokenList from "./components/TokenList";
+import { Layout } from "antd";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import { theme } from "./style/theme";
+import Sider from "antd/lib/layout/Sider";
+import Sidebar from "./components/layout/Sidebar";
 
 const { Content } = Layout;
 
 function App() {
   //web3 연동
   const [web3, setWeb3] = useState();
-  const [account, setAccount] = useState('');
+  const [account, setAccount] = useState("");
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
-  const [balance, setbalance] = useState('');
+  const [balance, setbalance] = useState("");
 
   const [collapsed, setCollapsed] = useState(true);
+  const [network, setNetwork] = useState();
+
+  const netArr = {
+    1: "ethereum mainnet",
+    2: "morden testnet",
+    3: "ropsten testnet",
+    4: "rinkeby testnet",
+  };
 
   useEffect(() => {
-    if (typeof window.ethereum !== 'undefined') {
+    if (typeof window.ethereum !== "undefined") {
       // window.ethereum이 있다면
       try {
         const web = new Web3(window.ethereum); // 새로운 web3 객체를 만든다
@@ -39,7 +47,7 @@ function App() {
   //지갑 연동
   const connectWallet = async () => {
     let accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
+      method: "eth_requestAccounts",
     });
 
     setAccount(accounts[0]);
@@ -47,10 +55,15 @@ function App() {
 
     !account[0] &&
       notification.success({
-        message: 'You are successfully connected Metamask',
-        description: 'Start minting your own NFTs with NFT Exchange today!',
-        placement: 'topLeft',
+        message: "You are successfully connected Metamask",
+        description: "Start minting your own NFTs with NFT Exchange today!",
+        placement: "topLeft",
       });
+
+    const networkVersion = await window.ethereum.request({
+      method: "net_version",
+    });
+    setNetwork(networkVersion);
   };
 
   //잔액조회
@@ -58,7 +71,7 @@ function App() {
   const getBalance = async (account) => {
     let balanceWei = await web3.eth.getBalance(account);
 
-    let balanceETH = await web3.utils.fromWei(balanceWei, 'ether'); //eth로 단위 변경
+    let balanceETH = await web3.utils.fromWei(balanceWei, "ether"); //eth로 단위 변경
 
     setbalance(balanceETH);
   };
@@ -96,7 +109,7 @@ function App() {
       <Layout
         className="layout"
         style={{
-          height: '100%',
+          height: "100%",
           background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
           color: `${theme.very_dark_blue_line}`,
           gap: `${theme.space_8}`,
@@ -109,13 +122,15 @@ function App() {
           connectWallet={connectWallet}
           account={account}
           balance={balance}
+          network={network}
+          netArr={netArr}
         />
 
         <Content
           style={{
-            padding: '0 50px',
-            display: 'flex',
-            flexDirection: 'column',
+            padding: "0 50px",
+            display: "flex",
+            flexDirection: "column",
             gap: `${theme.space_9}`,
           }}
           className="site-layout-content"

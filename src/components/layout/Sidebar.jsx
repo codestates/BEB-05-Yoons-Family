@@ -2,12 +2,12 @@ import {
   CloseOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import Sider from 'antd/lib/layout/Sider';
-import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../style/theme';
-import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
+} from "@ant-design/icons";
+import Sider from "antd/lib/layout/Sider";
+import React from "react";
+import styled from "styled-components";
+import { theme } from "../../style/theme";
+import { ReactComponent as MetamaskIcon } from "../../asset/icons/metamask-icon.svg";
 import {
   Avatar,
   Card,
@@ -17,14 +17,22 @@ import {
   Row,
   Tooltip,
   Typography,
-} from 'antd';
+} from "antd";
 
 const { Text } = Typography;
 
-function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
+function Sidebar({
+  collapsed,
+  setCollapsed,
+  connectWallet,
+  account,
+  balance,
+  network,
+  netArr,
+}) {
   return (
     <Sider
-      breakpoint={'xl'}
+      breakpoint={"xl"}
       trigger={null}
       reverseArrow={true}
       defaultCollapsed={true}
@@ -34,10 +42,10 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
       width={400}
       style={{
         zIndex: 500,
-        position: 'fixed',
+        position: "fixed",
         top: 85,
         right: 0,
-        height: '100vh',
+        height: "100vh",
         // backgroundColor: `${theme.very_dark_blue_main}`,
         background: `linear-gradient(${theme.very_dark_blue_sub}, ${theme.very_dark_blue_main} )`,
         // boxShadow: `0 1px 2px rgba(0, 0, 0, 0.25)`,
@@ -47,10 +55,10 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
       <CloseButton onClick={() => setCollapsed(!collapsed)}>
         <CloseOutlined
           style={{
-            padding: '2px',
+            padding: "2px",
             color: `${theme.white}`,
             fontSize: `28px`,
-            classname: 'close-icon',
+            classname: "close-icon",
           }}
         />
       </CloseButton>
@@ -59,23 +67,23 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
         {/* <MetamaskIcon></MetamaskIcon> */}
 
         {/* 미로그인 상태 */}
-        {account === '' ? (
+        {account === "" ? (
           <Row gutter={[48, 48]}>
             <Col span={22} offset={1}>
               <div
                 style={{
-                  height: '80px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  height: "80px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   borderBottom: `1px solid ${theme.very_light_blue_main}`,
                 }}
               >
                 <div
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                     gap: `${theme.space_2}`,
                   }}
                 >
@@ -96,14 +104,14 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                   fontSize: `${theme.fs_5}`,
                   color: `${theme.soft_blue}`,
                   lineHeight: 1,
-                  marginTop: '20px',
+                  marginTop: "20px",
                 }}
               >
                 If you don't have a
                 <Tooltip
                   placement="bottom"
                   title={
-                    'A crypto wallet is an application or hardware device that allows individuals to store and retrieve digital items.'
+                    "A crypto wallet is an application or hardware device that allows individuals to store and retrieve digital items."
                   }
                 >
                   &nbsp;
@@ -124,7 +132,7 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                 header={<div>Choose Your Wallet</div>}
                 //   footer={<div>Coming Soon More Wallet Support...</div>}
                 bordered
-                dataSource={['Meta Mask']}
+                dataSource={["Meta Mask"]}
                 renderItem={(item) => (
                   <WalletList onClick={connectWallet}>
                     <MetamaskIcon width={`${theme.fs_5}`} />
@@ -140,18 +148,18 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
             <Col span={22} offset={1}>
               <div
                 style={{
-                  height: '80px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  height: "80px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   borderBottom: `1px solid ${theme.very_light_blue_main}`,
                 }}
               >
                 <div
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                     gap: `${theme.space_2}`,
                   }}
                 >
@@ -166,41 +174,63 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                     NEO
                   </Text>
                 </div>
-                <Tooltip placement="top" title={'COPY'}>
+                <Tooltip placement="top" title={"COPY"}>
                   <Text
                     onClick={() => {
                       navigator.clipboard.writeText(account);
-                      message.success('Copied!');
+                      message.success("Copied!");
                     }}
                     style={{
                       color: `${theme.soft_blue}`,
                       fontSize: `${theme.fs_5}`,
                       fontWeight: `${theme.fw_500}`,
-                      cursor: 'pointer',
+                      cursor: "pointer",
                     }}
                   >
                     {account.length > 10 &&
                       account.substr(0, 6) +
-                        '...' +
+                        "..." +
                         account.substr(account.length - 4, account.length)}
                   </Text>
                 </Tooltip>
               </div>
               <Card
-                title={'Total balance'}
+                title={"Network"}
                 headStyle={{
                   color: `${theme.soft_blue}`,
-                  display: 'block',
-                  textAlign: 'center',
+                  display: "block",
+                  textAlign: "center",
                   borderColor: `${theme.very_dark_blue_line}`,
                 }}
                 bodyStyle={{
                   color: `${theme.cyan}`,
-                  textAlign: 'center',
+                  textAlign: "center",
                   fontSize: `${theme.fs_12}`,
                 }}
                 style={{
-                  margin: '20px 0px 20px 0px',
+                  margin: "20px 0px 20px 0px",
+                  width: 360,
+                  backgroundColor: `${theme.very_dark_blue_main}`,
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+              >
+                <p>{netArr[network]}</p>
+              </Card>
+              <Card
+                title={"Total balance"}
+                headStyle={{
+                  color: `${theme.soft_blue}`,
+                  display: "block",
+                  textAlign: "center",
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+                bodyStyle={{
+                  color: `${theme.cyan}`,
+                  textAlign: "center",
+                  fontSize: `${theme.fs_12}`,
+                }}
+                style={{
+                  margin: "20px 0px 20px 0px",
                   width: 360,
                   backgroundColor: `${theme.very_dark_blue_main}`,
                   borderColor: `${theme.very_dark_blue_line}`,
