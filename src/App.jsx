@@ -10,10 +10,12 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import { theme } from './style/theme';
 import Sidebar from './components/layout/Sidebar';
+import { useLocation } from 'react-router-dom';
 
 const { Content } = Layout;
 
 function App() {
+  const location = useLocation();
   //web3 연동
   const [web3, setWeb3] = useState();
   const [account, setAccount] = useState('');
@@ -34,6 +36,11 @@ function App() {
       }
     }
   }, []);
+
+  //페이지 이동시 사이드바 닫힘
+  useEffect(() => {
+    setCollapsed(true);
+  }, [location.pathname]);
 
   //지갑 연동
   const connectWallet = async () => {

@@ -10,16 +10,16 @@ function FooterComponent() {
   return (
     <Footer>
       <Row justify="space-between">
-        <Col flex="0 1 300px">
+        <Col xs={0} xl={6}>
           <Comment></Comment>
         </Col>
-        <Col flex="0 1 300px">
+        <Col xs={0} xl={6}>
           <Comment></Comment>
         </Col>
-        <Col flex="0 1 300px">
+        <Col xs={0} xl={6}>
           <Comment></Comment>
         </Col>
-        <Col flex="0 1 300px">
+        <Col xs={0} xl={6}>
           <Comment></Comment>
         </Col>
       </Row>

@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import NFTPreview from '../../components/NFTPreview';
 import { theme } from '../../style/theme';
+import { NFTData } from '../../temp/dummyDataNFT';
 import { collectionDataTrending } from '../../temp/dummyDataTrending';
 import Notfound from '../Notfound';
 
@@ -95,9 +96,12 @@ function Collection() {
           <Row gutter={[16, 16]}>
             {new Array(28).fill(null).map((_, idx) => {
               return (
-                <ColNFTList key={Symbol(idx + 1).toString()}>
-                  <NFTPreview key={Symbol(idx + 1).toString()}></NFTPreview>
-                </ColNFTList>
+                <Col xs={12} xl={6} key={Symbol(idx + 1).toString()}>
+                  <NFTPreview
+                    key={Symbol(idx + 1).toString()}
+                    NFTData={NFTData}
+                  ></NFTPreview>
+                </Col>
               );
             })}
           </Row>
@@ -148,10 +152,5 @@ const Sider = styled(_Sider)`
 `;
 const Menu = styled(_Menu)`
   background-color: rgba(0, 0, 0, 0);
-`;
-
-// 리스트
-const ColNFTList = styled(Col)`
-  flex: 1 0 calc(100% * (1 / 4));
 `;
 export default Collection;

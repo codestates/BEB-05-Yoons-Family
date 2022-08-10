@@ -10,7 +10,7 @@ import { collectionDataTrending } from '../../temp/dummyDataTrending';
 function Section3() {
   return (
     <Row justify="center" align="middle">
-      <Col flex="0 1 800px">
+      <Col xs={24} xl={12}>
         <Title style={{ textAlign: 'center' }}>
           Discover Extraordinary Collect
         </Title>

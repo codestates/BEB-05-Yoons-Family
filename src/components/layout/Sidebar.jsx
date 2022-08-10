@@ -196,7 +196,7 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                 }}
                 style={{
                   margin: '20px 0px 20px 0px',
-                  width: 360,
+                  width: '100%',
                   backgroundColor: `${theme.very_dark_blue_main}`,
                   borderColor: `${theme.very_dark_blue_line}`,
                 }}
