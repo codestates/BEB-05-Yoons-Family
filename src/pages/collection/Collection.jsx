@@ -32,7 +32,7 @@ function Collection() {
   const collection_key = location.pathname.split('/')[2];
 
   return (
-    <Row justify="center" align="middle">
+    <Row justify="center" align="middle" style={{ marginTop: '-15vh' }}>
       <Col span={24}>
         <CollentionBackgound
           src={collectionData.collection_background_img}
@@ -95,9 +95,9 @@ function Collection() {
           <Row gutter={[16, 16]}>
             {new Array(28).fill(null).map((_, idx) => {
               return (
-                <Col span={6} key={Symbol(idx + 1).toString()}>
+                <ColNFTList key={Symbol(idx + 1).toString()}>
                   <NFTPreview key={Symbol(idx + 1).toString()}></NFTPreview>
-                </Col>
+                </ColNFTList>
               );
             })}
           </Row>
@@ -117,12 +117,13 @@ const CollentionProfileImg = styled.img`
   height: auto;
   padding: ${theme.space_1};
   background-color: ${theme.white};
-  border-radius: ${theme.radius_10};
+  /* border-radius: ${theme.radius_10}; */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   transform: translate(50%, -50%);
 `;
 
 const Title = styled.p`
+  margin-top: -4vh;
   margin-bottom: ${theme.space_1};
   font-size: ${theme.fs_14};
   font-weight: ${theme.fw_700};
@@ -141,10 +142,16 @@ const Layout = styled(_Layout)`
   }
 `;
 
+//메뉴
 const Sider = styled(_Sider)`
   background-color: rgba(0, 0, 0, 0);
 `;
 const Menu = styled(_Menu)`
   background-color: rgba(0, 0, 0, 0);
+`;
+
+// 리스트
+const ColNFTList = styled(Col)`
+  flex: 1 0 calc(100% * (1 / 4));
 `;
 export default Collection;
