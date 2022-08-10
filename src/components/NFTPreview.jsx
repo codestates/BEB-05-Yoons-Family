@@ -13,6 +13,7 @@ function NFTpreview({ key }) {
         <Image
           alt="nft-card"
           src="https://img.seadn.io/files/6fc5396c3bf31854e4e1f2785d86fcda.png?fit=max&w=600"
+          preview={false}
         />
       }
     >

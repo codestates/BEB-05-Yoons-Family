@@ -1,4 +1,5 @@
 export const collectionDataArt = {
+  collection_key: 'void',
   collection_name: 'VOID - Visitors of Imma Degen',
   collection_profile_img:
     'https://lh3.googleusercontent.com/ykrl73bgMzN8pfYhpTf2g2ayRHBQ-8Ga8pQyjSk06QUXk2DArZhkOfl-dIf3S2PjofZ4i5igYtp4pXJDZFomLSMphwf6Jdbsoj0NoA=s168',
