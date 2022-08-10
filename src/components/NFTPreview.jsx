@@ -24,7 +24,11 @@ function NFTpreview({ key, NFTData }) {
         }
       >
         <Meta
-          title={NFTData.name}
+          title={
+            <Paragraph ellipsis style={{ fontSize: `${theme.fs_4}` }}>
+              {NFTData.name}
+            </Paragraph>
+          }
           description={
             <>
               <Paragraph ellipsis style={{ fontSize: `${theme.fs_1}` }}>
@@ -46,7 +50,7 @@ function NFTpreview({ key, NFTData }) {
               </p>
             </>
           }
-          style={{ width: '100px', height: '100px' }}
+          style={{ width: 'auto', height: '100px' }}
         />
       </Card>
     </Link>
