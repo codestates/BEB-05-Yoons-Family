@@ -5,26 +5,47 @@ import {
   Divider,
   Form,
   Input,
+  notification,
   Row,
   Select,
   Typography,
   Upload,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
+import NotAuthorized from '../NotAuthorized';
+
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
-function Create() {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+const loginNoti = () => {
+  notification.warning({
+    message: 'Please Connect to Metamask',
+    description: 'In order to mint, you must first connect with the Metamask.',
+    placement: 'topLeft',
+  });
+};
 
-  return (
+//temp function. You can delete this function if you don't need it
+const onFinish = (values) => {
+  console.log('Success:', values);
+};
+
+//temp function. You can delete this function if you don't need it
+const onFinishFailed = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
+
+function Create({ web3, setCollapsed, account }) {
+  useEffect(() => {
+    !account && loginNoti();
+    setCollapsed(false);
+  }, []);
+
+  return !account ? (
+    <NotAuthorized />
+  ) : (
     <Row justify="center" align="middle">
       <Col flex="0 1 800px">
         <Form

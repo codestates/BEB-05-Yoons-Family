@@ -8,7 +8,7 @@ import Explore from '../pages/explore/Explore';
 import Section3 from '../pages/home/Section3';
 import Collection from '../pages/collection/Collection';
 
-export default function Router({ collapsed, setCollapsed, account }) {
+export default function Router({ web3, collapsed, setCollapsed, account }) {
   return (
     <Routes>
       <Route path="*" element={<Notfound />} />
@@ -28,7 +28,12 @@ export default function Router({ collapsed, setCollapsed, account }) {
       <Route path="/assets/all" element={<Explore />} />
       <Route path="/assets/art" element={<Explore />} />
       <Route path="/assets/collectibles" element={<Explore />} />
-      <Route path="/assets/create" element={<Create />} />
+      <Route
+        path="/assets/create"
+        element={
+          <Create web3={web3} setCollapsed={setCollapsed} account={account} />
+        }
+      />
       <Route path="/collection/:collection_key" element={<Collection />} />
     </Routes>
   );
