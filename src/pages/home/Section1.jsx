@@ -44,14 +44,14 @@ function Section1({ collapsed, setCollapsed, account }) {
 }
 
 const Title = styled.p`
-  font-size: ${theme.fs_11};
+  font-size: ${theme.fs_12};
   font-weight: ${theme.fw_700};
 `;
 const Explain = styled.p`
-  font-size: ${theme.fs_8};
+  font-size: ${theme.fs_9};
 `;
 const Content = styled.p`
-  font-size: ${theme.fs_3};
+  font-size: ${theme.fs_2};
 `;
 
 const Button = styled(_Button)``;

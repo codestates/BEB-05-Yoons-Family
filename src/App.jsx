@@ -98,7 +98,7 @@ function App() {
           height: '100%',
           background: `linear-gradient(${theme.very_light_blue_main}, ${theme.white} )`,
           color: `${theme.very_dark_blue_line}`,
-          gap: `${theme.space_7}`,
+          gap: `${theme.space_8}`,
         }}
       >
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
@@ -115,7 +115,7 @@ function App() {
             padding: '0 50px',
             display: 'flex',
             flexDirection: 'column',
-            gap: `${theme.space_9}`,
+            gap: `${theme.space_10}`,
           }}
           className="site-layout-content"
         >
