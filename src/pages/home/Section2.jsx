@@ -1,4 +1,4 @@
-import { Card, Col, Image, Row } from 'antd';
+import { Card, Col as _Col, Image, Row } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import NFTPreview from '../../components/NFTPreview';
@@ -14,7 +14,7 @@ function Section2() {
         <Row gutter={[16, 16]}>
           {new Array(8).fill(null).map((_, idx) => {
             return (
-              <Col flex="1 1 200px" key={Symbol(idx + 1).toString()}>
+              <Col key={Symbol(idx + 1).toString()}>
                 <NFTPreview key={Symbol(idx + 1).toString()}></NFTPreview>
               </Col>
             );
@@ -28,6 +28,10 @@ function Section2() {
 const Title = styled.p`
   font-size: ${theme.fs_10};
   font-weight: ${theme.fw_700};
+`;
+
+const Col = styled(_Col)`
+  flex: 1 0 calc(100% * (1 / 4));
 `;
 
 export default Section2;
