@@ -1,11 +1,7 @@
-import {
-  CloseOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import Sider from 'antd/lib/layout/Sider';
+import { CloseOutlined, UserOutlined } from '@ant-design/icons';
 import React from 'react';
 import styled from 'styled-components';
+import Sider from 'antd/lib/layout/Sider';
 import { theme } from '../../style/theme';
 import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
 import {
@@ -24,21 +20,20 @@ const { Text } = Typography;
 function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
   return (
     <Sider
-      breakpoint={'xl'}
       trigger={null}
       reverseArrow={true}
       defaultCollapsed={true}
       collapsible
       collapsed={collapsed}
       collapsedWidth={0}
-      width={400}
+      width={`${1200 < window.innerWidth ? '400px' : '100%'}`}
       style={{
-        zIndex: 500,
+        maxWidth: '100%',
         position: 'fixed',
-        top: 85,
+        zIndex: 500,
+        top: 64,
         right: 0,
         height: '100vh',
-        // backgroundColor: `${theme.very_dark_blue_main}`,
         background: `linear-gradient(${theme.very_dark_blue_sub}, ${theme.very_dark_blue_main} )`,
         // boxShadow: `0 1px 2px rgba(0, 0, 0, 0.25)`,
       }}
