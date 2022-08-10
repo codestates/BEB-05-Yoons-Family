@@ -109,7 +109,6 @@ function App() {
           account={account}
           balance={balance}
         />
-
         <Content
           style={{
             padding: '0 50px',
