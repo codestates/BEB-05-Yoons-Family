@@ -14,18 +14,11 @@ import {
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { loginNoti } from '../../asset/utils/notification';
 import { theme } from '../../style/theme';
 import NotAuthorized from '../NotAuthorized';
 
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
-
-const loginNoti = () => {
-  notification.warning({
-    message: 'Please Connect to Metamask',
-    description: 'In order to mint, you must first connect with the Metamask.',
-    placement: 'topLeft',
-  });
-};
 
 //temp function. You can delete this function if you don't need it
 const onFinish = (values) => {

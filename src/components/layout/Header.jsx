@@ -1,5 +1,5 @@
 import { Layout, Menu as _Menu, Row, Col } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   AppstoreOutlined,
@@ -47,9 +47,9 @@ function HeaderComponent({ collapsed, setCollapsed }) {
           <Menu mode="horizontal">
             <Menu.SubMenu key="explore" title="Explore">
               <Menu.Item
-                key="explore-all-nfts"
+                key="explore-trending-nfts"
                 icon={<AppstoreOutlined />}
-                onClick={() => navigate('/assets')}
+                onClick={() => navigate('/assets/trending')}
               >
                 All NFTs
               </Menu.Item>
@@ -69,10 +69,18 @@ function HeaderComponent({ collapsed, setCollapsed }) {
               </Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu key="stats" title="Stats">
-              <Menu.Item key="stats-rankings" icon={<RiseOutlined />}>
+              <Menu.Item
+                key="stats-rankings"
+                icon={<RiseOutlined />}
+                onClick={() => alert('coming soon...')}
+              >
                 Rankings
               </Menu.Item>
-              <Menu.Item key="stats-activity" icon={<SlidersOutlined />}>
+              <Menu.Item
+                key="stats-activity"
+                icon={<SlidersOutlined />}
+                onClick={() => alert('coming soon...')}
+              >
                 Activity
               </Menu.Item>
             </Menu.SubMenu>

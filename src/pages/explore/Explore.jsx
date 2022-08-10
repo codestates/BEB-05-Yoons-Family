@@ -32,8 +32,8 @@ function ExploreRouter() {
           Explore collections
         </Title>
 
-        <Tabs defaultActiveKey={location.pathname} onChange={onChange}>
-          <TabPane tab="Trending" key="/assets/all">
+        <Tabs onChange={onChange} activeKey={location.pathname}>
+          <TabPane tab="Trending" key="/assets/trending">
             <CollectionList collectionData={collectionDataTrending} />
           </TabPane>
           <TabPane tab="Art" key="/assets/art">

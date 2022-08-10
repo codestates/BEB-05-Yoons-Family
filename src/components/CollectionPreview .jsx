@@ -2,8 +2,7 @@ import { Avatar, Card, Image } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as EthereumIcon } from '../asset/icons/ethereum-eth-logo.svg';
-import { theme } from '../style/theme';
+import { emptyImg } from '../asset/imgs/entryImg';
 
 function CollectionPreview({ collectionData }) {
   return (
@@ -16,6 +15,7 @@ function CollectionPreview({ collectionData }) {
             alt="collection-card"
             src={collectionData.collection_banner_img}
             preview={false}
+            fallback={emptyImg}
           />
         }
       >
