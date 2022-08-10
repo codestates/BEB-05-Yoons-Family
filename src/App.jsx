@@ -120,6 +120,7 @@ function App() {
           className="site-layout-content"
         >
           <Router
+            web3={web3}
             collapsed={collapsed}
             setCollapsed={setCollapsed}
             account={account}

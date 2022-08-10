@@ -124,7 +124,7 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                 header={<div>Choose Your Wallet</div>}
                 //   footer={<div>Coming Soon More Wallet Support...</div>}
                 bordered
-                dataSource={['Meta Mask']}
+                dataSource={['MetaMask']}
                 renderItem={(item) => (
                   <WalletList onClick={connectWallet}>
                     <MetamaskIcon width={`${theme.fs_5}`} />
