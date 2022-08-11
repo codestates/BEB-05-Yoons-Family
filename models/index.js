@@ -2,7 +2,7 @@ const db = require("../db");
 
 module.exports = {
   get1: (address, callback) => {
-    const queryString = `SELECT token_id, image, name, owner, description, price FROM NFT WHERE owner = ?`;
+    const queryString = `SELECT token_id, token_img, token_name, token_owner, token_description, token_price FROM NFT WHERE token_owner = ?`;
     const params = [address];
 
     db.query(queryString, params, (error, result) => {
@@ -11,7 +11,7 @@ module.exports = {
     });
   },
   get2: (name, callback) => {
-    const queryString = `SELECT token_id, image, name, owner, description, price FROM NFT WHERE name = ?`;
+    const queryString = `SELECT token_id, token_img, token_name, token_owner, token_description, token_price FROM NFT WHERE token_name = ?`;
     const params = [name];
 
     db.query(queryString, params, (error, result) => {
@@ -20,7 +20,7 @@ module.exports = {
     });
   },
   get3: (callback) => {
-    const queryString = `SELECT token_id, image, name, owner, description, price FROM NFT`;
+    const queryString = `SELECT token_id, token_img, token_name, token_owner, token_description, token_price FROM NFT`;
 
     db.query(queryString, (error, result) => {
       console.log(result);
