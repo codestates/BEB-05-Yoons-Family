@@ -50,15 +50,13 @@ function App() {
 
   //계정 변경
   const handleAccountChange = (...args) => {
-    const accounts = args[0];
-    if (accounts.length === 0) {
+    const _account = args[0][0];
+    if (args[0].length === 0) {
       loginWarningNoti();
-    } else if (accounts !== account) {
-      setAccount(accounts);
-      getBalance(accounts);
-      if (accounts) {
-        changedAccountNoti(accounts);
-      }
+    } else if (_account !== account) {
+      setAccount(_account);
+      getBalance(_account);
+      changedAccountNoti(_account);
     }
   };
   useEffect(() => {
