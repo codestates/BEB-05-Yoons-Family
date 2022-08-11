@@ -4,12 +4,14 @@ const app = express();
 const port = 4000;
 
 const exploreRouter = require("./router/explore");
+const connectRouter = require("./router/connect");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/explore", exploreRouter);
+app.use("/connect", connectRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send("NFT Exchange open");
