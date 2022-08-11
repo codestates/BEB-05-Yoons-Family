@@ -29,12 +29,13 @@ module.exports = {
     }
   },
   saveAccount: (req, res) => {
-    const { user_account, user_nickname, user_balance } = req.body;
-    models.save(user_account, user_nickname, user_balance, (error, result) => {
+    const { user_account, user_balance } = req.body;
+    console.log(req.body);
+    models.save(user_account, user_balance, (error, result) => {
       if (error) {
         return res.status(500).send("Internal Server Error");
       } else {
-        return res.status(201);
+        return res.status(201).json({ message: "success!" });
       }
     });
   },

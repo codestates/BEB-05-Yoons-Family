@@ -27,9 +27,9 @@ module.exports = {
       callback(error, result);
     });
   },
-  save: (user_account, user_nickname, user_balance, callback) => {
-    const queryString = `INSERT INTO Users (user_account, user_nickname, user_balance) VALUES (?, ?, ?)`;
-    const params = [user_account, user_nickname, user_balance];
+  save: (user_account, user_balance, callback) => {
+    const queryString = `INSERT INTO Users (user_account, user_balance) VALUES (?, ?)`;
+    const params = [user_account, user_balance];
 
     db.query(queryString, params, (error, result) => {
       console.log(result);

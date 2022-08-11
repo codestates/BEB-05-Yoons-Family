@@ -46,7 +46,6 @@ CREATE TABLE Collections (
 
 CREATE TABLE Users (
   user_account varchar(100),
-  user_nickname varchar(100),
   user_balance FLOAT,
   created_at datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(user_account)

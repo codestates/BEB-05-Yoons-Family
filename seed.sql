@@ -1,0 +1,3 @@
+INSERT INTO Contracts (contract_address, contract_description, contract_title, contract_category) VALUES ("컨트랙트 계정", "description", "title", "카테고리");
+INSERT INTO Collections (collection_no, collection_name, collection_key, collection_profile_img, collection_banner_img, collection_description, collection_author) VALUES ("0", "컬렉션 이름", "key", "프로필 이미지", "배너 이미지", "description", "author");
+INSERT INTO NFT (token_id, token_img, token_name, token_owner, contract_address, token_description, token_price, collection_no) VALUES ("1", "이미지 주소", "토큰 이름", "owner 계정", "컨트랙트 계정", "description", "2.3", "0");
