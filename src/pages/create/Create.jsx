@@ -1,21 +1,14 @@
 import { PlusOutlined, LoadingOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js';
-import { Button, Col, Divider, Form, Input, Row, Select, Typography, Upload, message } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
+import { Col, Divider, Form, Row, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { loginNoti } from '../../asset/utils/notification';
-import { theme } from '../../style/theme';
 import NotAuthorized from '../NotAuthorized';
 import erc721Abi from '../../erc721Abi';
+import * as CreateComp from '../../components/create';
 
-const { Title: _Title, Paragraph: _Paragraph } = Typography;
-
-// env에서 컨트랙트 주소를 불러오지 못하는 거 같아 일단은 값을 넣어둠. 변경필요
-const contract_addr = '0xDE119864aBb7bfdC4B0a5930286AB88ec33b1eE5';
-
-// console.log("hihi", process.env.NODE_ENV);
-console.log('hihi', contract_addr);
+const contract_addr = process.env.CONTRACT_ADDRESS;
+const NFT_STORAGE_TOKEN = process.env.NFT_STORAGE_TOKEN;
 
 //temp function. You can delete this function if you don't need it
 const onFinish = (values) => {
@@ -44,14 +37,17 @@ const beforeUpload = (file) => {
 };
 
 function Create({ web3, setCollapsed, account }) {
-  // const [image, setImage] = useState(null);
-  // const [data, setData] = useState({ name: "", description: "" });
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [to, setTo] = useState('');
   const [loadings, setLoadings] = useState([]);
+
+  useEffect(() => {
+    !account && loginNoti();
+    !account && setCollapsed(false);
+  }, []);
 
   const handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -68,7 +64,7 @@ function Create({ web3, setCollapsed, account }) {
 
   const uploadButton = (
     <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
       <div
         style={{
           marginTop: 8,
@@ -79,15 +75,19 @@ function Create({ web3, setCollapsed, account }) {
     </div>
   );
 
+<<<<<<< HEAD
   const mint = async () => {
     setLoadings((prevLoadings) => {
       const newLoadings = [...prevLoadings];
       newLoadings[1] = true;
       return newLoadings;
     });
+=======
+  //민팅
+  const onMint = async () => {
+    console.log('upload');
+>>>>>>> 4fb2ccbf50d72b4c34564c9051fd9fdb17e50998
 
-    const NFT_STORAGE_TOKEN =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGE4ZDBCN2IxNmZEMDAzNjA1OUY2ODA2ODBhOTY0Y0Q4RTA1Yzk1NjYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2MDE0MzgwNzIwNywibmFtZSI6IllPT04gRkFNSUxZIn0.Oc37n9p13TvckSJHSS5mU2vaqs-K0646CIFFnRoqwHE';
     const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
     const metadata = await client.store({
@@ -117,12 +117,6 @@ function Create({ web3, setCollapsed, account }) {
     }, 10);
   };
 
-  useEffect(() => {
-    !account && loginNoti();
-    setCollapsed(false);
-    console.log(account);
-  }, []);
-
   return !account ? (
     <NotAuthorized />
   ) : (
@@ -136,6 +130,7 @@ function Create({ web3, setCollapsed, account }) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
+<<<<<<< HEAD
           <Title
             style={{
               textAlign: 'center',
@@ -275,18 +270,28 @@ function Create({ web3, setCollapsed, account }) {
               Create
             </Button>
           </Form.Item>
+=======
+          <CreateComp.CreatePageTitle />
+          <CreateComp.UploadImage
+            beforeUpload={beforeUpload}
+            handleChange={handleChange}
+            image={image}
+            uploadButton={uploadButton}
+          />
+          <CreateComp.InputName setName={setName} />
+          <CreateComp.InputExternalLink />
+          <CreateComp.InputDesctiption setDescription={setDescription} />
+          <CreateComp.SelectCollection />
+          <CreateComp.InputSupply />
+          <CreateComp.SelectBlockchain />
+          <CreateComp.InputFreezeMetadata />
+          <Divider />
+          <CreateComp.ButtonMint onMint={onMint} />
+>>>>>>> 4fb2ccbf50d72b4c34564c9051fd9fdb17e50998
         </Form>
       </Col>
     </Row>
   );
 }
-
-const Title = styled(_Title)`
-  color: ${theme.very_dark_blue_line} !important;
-`;
-
-const Paragraph = styled(_Paragraph)`
-  color: ${theme.very_dark_blue_line} !important;
-`;
 
 export default Create;
