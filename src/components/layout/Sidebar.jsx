@@ -17,7 +17,7 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
       collapsible
       collapsed={collapsed}
       collapsedWidth={0}
-      width={`${1200 < window.innerWidth ? '400px' : '100%'}`}
+      width={`${1200 < window.innerWidth ? '20vw' : '100%'}`}
       style={{
         maxWidth: '100%',
         position: 'fixed',
