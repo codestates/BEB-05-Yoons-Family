@@ -2,7 +2,7 @@ import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
 import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js';
 import { Col, Divider, Form, Row, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { loginNoti } from '../../asset/utils/notification';
+import { loginWarningNoti } from '../../asset/utils/notification';
 import NotAuthorized from '../NotAuthorized';
 import erc721Abi from '../../erc721Abi';
 import * as CreateComp from '../../components/create';
@@ -44,7 +44,7 @@ function Create({ web3, setCollapsed, account }) {
   const [to, setTo] = useState('');
 
   useEffect(() => {
-    !account && loginNoti();
+    !account && loginWarningNoti();
     !account && setCollapsed(false);
   }, []);
 

@@ -8,11 +8,11 @@ import { theme } from '../style/theme';
 
 const { Paragraph } = Typography;
 
-function NFTpreview({ key, NFTData }) {
+function NFTpreview({ NFTData }) {
   return (
     <Link to={`/assets/ethereum/${NFTData.contract_address}`}>
       <Card
-        key={key + 1}
+        key={NFTData.token_id}
         hoverable
         cover={
           <Image
