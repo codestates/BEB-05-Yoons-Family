@@ -1,7 +1,7 @@
 import { Button, Form } from 'antd';
 import React from 'react';
 
-function ButtonMint({ onMint }) {
+function ButtonMint({ onMint, loadings }) {
   return (
     <>
       <Form.Item name="create-button">

@@ -7,8 +7,10 @@ import NotAuthorized from '../NotAuthorized';
 import erc721Abi from '../../erc721Abi';
 import * as CreateComp from '../../components/create';
 
-const contract_addr = process.env.CONTRACT_ADDRESS;
-const NFT_STORAGE_TOKEN = process.env.NFT_STORAGE_TOKEN;
+const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
+const NFT_STORAGE_TOKEN = process.env.REACT_APP_NFT_STORAGE_TOKEN;
+
+console.log('contract_addr', contract_addr);
 
 //temp function. You can delete this function if you don't need it
 const onFinish = (values) => {
@@ -75,19 +77,8 @@ function Create({ web3, setCollapsed, account }) {
     </div>
   );
 
-<<<<<<< HEAD
-  const mint = async () => {
-    setLoadings((prevLoadings) => {
-      const newLoadings = [...prevLoadings];
-      newLoadings[1] = true;
-      return newLoadings;
-    });
-=======
   //민팅
   const onMint = async () => {
-    console.log('upload');
->>>>>>> 4fb2ccbf50d72b4c34564c9051fd9fdb17e50998
-
     const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
     const metadata = await client.store({
@@ -107,14 +98,6 @@ function Create({ web3, setCollapsed, account }) {
     tokenContract.methods.mintNFT(account, metadata).send({
       from: account,
     });
-
-    setTimeout(() => {
-      setLoadings((prevLoadings) => {
-        const newLoadings = [...prevLoadings];
-        newLoadings[1] = false;
-        return newLoadings;
-      });
-    }, 10);
   };
 
   return !account ? (
@@ -130,147 +113,6 @@ function Create({ web3, setCollapsed, account }) {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-<<<<<<< HEAD
-          <Title
-            style={{
-              textAlign: 'center',
-              marginBottom: `${theme.space_7}`,
-              fontSize: `${theme.fs_14}`,
-              fontWeight: `${theme.fw_700}`,
-            }}
-          >
-            Create New Item
-          </Title>
-          <Title level={3}>Image, Video, Audio, or 3D Model</Title>
-          <Paragraph>
-            File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size:
-            100 MB
-          </Paragraph>
-          <Form.Item label="Upload" valuePropName="fileList">
-            <Upload
-              action="/upload.do"
-              listType="picture-card"
-              rules={[
-                {
-                  required: true,
-                  message: 'This field is required.',
-                },
-              ]}
-              beforeUpload={beforeUpload}
-              onChange={handleChange}
-              maxCount={1}
-            >
-              {/* <div>
-                <PlusOutlined />
-                <div
-                  style={{
-                    marginTop: 8,
-                  }}
-                >
-                  Upload
-                </div>
-              </div> */}
-              {uploadButton}
-              {/* {image ? (
-                <img
-                  src={image}
-                  alt="avatar"
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              ) : (
-                uploadButton
-              )} */}
-            </Upload>
-          </Form.Item>
-          <Title level={3}>Name</Title>
-          <Form.Item
-            name={'name'}
-            rules={[
-              {
-                required: true,
-                message: 'This field is required.',
-              },
-            ]}
-          >
-            <Input
-              placeholder="Item"
-              size="large"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </Form.Item>
-          <Title level={3}>External link</Title>
-          <Paragraph>
-            NFT Exchange will include a link to this URL on this item's detail page, so that users
-            can click to learn more about it. You are welcome to link to your own webpage with more
-            details.
-          </Paragraph>
-          <Form.Item name={'external-link'}>
-            <Input placeholder="http://yoursite.io/item/123" size="large" />
-          </Form.Item>
-          <Title level={3}>Description</Title>
-          <Paragraph>
-            The description will be included on the item's detail page underneath its image.
-          </Paragraph>
-          <Form.Item name={'description'}>
-            <TextArea
-              rows={4}
-              placeholder="Provide a detailed description of your item."
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
-          </Form.Item>
-          <Title level={3}>Collection</Title>
-          <Paragraph>This is the collection where your item will appear.</Paragraph>
-          <Form.Item name={'collection'}>
-            <Select initialvalues={'crypto-punk'} size="large">
-              <Select.Option value="crypto-punk">Crypto Punk</Select.Option>
-              <Select.Option value="colne-x">Clone X</Select.Option>
-            </Select>
-          </Form.Item>
-          <Title level={3}>Supply</Title>
-          <Paragraph>The number of items that can be minted. No gas cost to you!</Paragraph>
-          <Form.Item name={'supply'}>
-            <Input initialvalues={'1'} size="large" />
-          </Form.Item>
-          <Title level={3}>Blockchain</Title>
-          <Form.Item name="blockchain">
-            <Select size="large">
-              <Select.Option initialvalues={'ethereum'} value="ethereum" size="large">
-                Ethereum
-              </Select.Option>
-            </Select>
-          </Form.Item>
-          <Title level={3}>Freeze metadata</Title>
-          <Paragraph>
-            Freezing your metadata will allow you to permanently lock and store all of this item's
-            content in decentralized file storage.
-          </Paragraph>
-          <Form.Item name="freeze-metadata">
-            <Input
-              placeholder="To freeze your metadata, you must create item first."
-              disabled
-              size="large"
-            />
-          </Form.Item>
-          <Divider />
-          <Form.Item name="create-button">
-            <Button
-              type="primary"
-              size="large"
-              loading={loadings[1]}
-              onClick={() => {
-                mint();
-              }}
-            >
-              Create
-            </Button>
-          </Form.Item>
-=======
           <CreateComp.CreatePageTitle />
           <CreateComp.UploadImage
             beforeUpload={beforeUpload}
@@ -287,7 +129,6 @@ function Create({ web3, setCollapsed, account }) {
           <CreateComp.InputFreezeMetadata />
           <Divider />
           <CreateComp.ButtonMint onMint={onMint} />
->>>>>>> 4fb2ccbf50d72b4c34564c9051fd9fdb17e50998
         </Form>
       </Col>
     </Row>
