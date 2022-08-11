@@ -43,7 +43,6 @@ function Create({ web3, setCollapsed, account }) {
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [to, setTo] = useState('');
   const [loadings, setLoadings] = useState([]);
 
   useEffect(() => {
@@ -79,6 +78,11 @@ function Create({ web3, setCollapsed, account }) {
 
   //민팅
   const onMint = async () => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[1] = true;
+      return newLoadings;
+    });
     const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
     const metadata = await client.store({
@@ -94,10 +98,17 @@ function Create({ web3, setCollapsed, account }) {
       from: account,
     });
 
-    console.log('BEFORE MING', account, metadata);
     tokenContract.methods.mintNFT(account, metadata).send({
       from: account,
     });
+
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[1] = false;
+        return newLoadings;
+      });
+    }, 10);
   };
 
   return !account ? (
@@ -128,7 +139,7 @@ function Create({ web3, setCollapsed, account }) {
           <CreateComp.SelectBlockchain />
           <CreateComp.InputFreezeMetadata />
           <Divider />
-          <CreateComp.ButtonMint onMint={onMint} />
+          <CreateComp.ButtonMint loading={loadings[1]} onMint={onMint} />
         </Form>
       </Col>
     </Row>
