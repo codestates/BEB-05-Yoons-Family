@@ -27,8 +27,7 @@ import {
   WalletFilled,
   ZoomInOutlined,
 } from '@ant-design/icons';
-import styled from 'styled-components';
-import { loginNoti } from '../../asset/utils/notification';
+import { loginWarningNoti } from '../../asset/utils/notification';
 
 const { Panel } = Collapse;
 const { Title, Text, Paragraph } = Typography;
@@ -88,12 +87,12 @@ function NFTDetails({ web3, setCollapsed, account }) {
 
   const onBuyNow = () => {
     !account && setCollapsed(false);
-    loginNoti();
+    !account && loginWarningNoti();
   };
 
   const onMakeOffer = () => {
     !account && setCollapsed(false);
-    loginNoti();
+    !account && loginWarningNoti();
   };
 
   return (
