@@ -7,8 +7,8 @@ import NotAuthorized from '../NotAuthorized';
 import erc721Abi from '../../erc721Abi';
 import * as CreateComp from '../../components/create';
 
-const contract_addr = process.env.CONTRACT_ADDRESS;
-const NFT_STORAGE_TOKEN = process.env.NFT_STORAGE_TOKEN;
+const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
+const NFT_STORAGE_TOKEN = process.env.REACT_APP_NFT_STORAGE_TOKEN;
 
 //temp function. You can delete this function if you don't need it
 const onFinish = (values) => {
