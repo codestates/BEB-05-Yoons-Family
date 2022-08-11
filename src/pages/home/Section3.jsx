@@ -11,9 +11,7 @@ function Section3() {
   return (
     <Row justify="center" align="middle">
       <Col xs={24} xl={12}>
-        <Title style={{ textAlign: 'center' }}>
-          Discover Extraordinary Collect
-        </Title>
+        <Title style={{ textAlign: 'center' }}>Discover Extraordinary Collect</Title>
 
         <Carousel autoplay style={{ maxWidth: '800px' }}>
           {/* {new Array(4).fill(null).map((_, idx) => {

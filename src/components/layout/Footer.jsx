@@ -32,9 +32,7 @@ function FooterComponent() {
               xl={6}
               key={info.github_id}
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                (window.location.href = `https://github.com/${info.github_id}`)
-              }
+              onClick={() => (window.location.href = `https://github.com/${info.github_id}`)}
               title={`https://github.com/${info.github_id}`}
             >
               <Comment footerData={info}></Comment>

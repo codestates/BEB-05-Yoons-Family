@@ -4,16 +4,7 @@ import styled from 'styled-components';
 import Sider from 'antd/lib/layout/Sider';
 import { theme } from '../../style/theme';
 import { ReactComponent as MetamaskIcon } from '../../asset/icons/metamask-icon.svg';
-import {
-  Avatar,
-  Card,
-  Col,
-  List as _List,
-  message,
-  Row,
-  Tooltip,
-  Typography,
-} from 'antd';
+import { Avatar, Card, Col, List as _List, message, Row, Tooltip, Typography } from 'antd';
 
 const { Text } = Typography;
 
