@@ -95,16 +95,12 @@ function Create({ web3, setCollapsed, account }) {
         const NFT_STORAGE_TOKEN =
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGE4ZDBCN2IxNmZEMDAzNjA1OUY2ODA2ODBhOTY0Y0Q4RTA1Yzk1NjYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2MDE0MzgwNzIwNywibmFtZSI6IllPT04gRkFNSUxZIn0.Oc37n9p13TvckSJHSS5mU2vaqs-K0646CIFFnRoqwHE";
         const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
-        console.log(client);
 
         const metadata = await client.store({
             name: name,
             description: description,
             image: image,
         });
-
-        console.log(metadata);
-        // console.log("IPFS URL for the metadata:", metadata.data.image.pathname);
 
         const metadataUrl = `https://ipfs.io/ipfs/${metadata.data.image.pathname}`;
         console.log(metadataUrl);
@@ -121,48 +117,6 @@ function Create({ web3, setCollapsed, account }) {
         tokenContract.methods.mintNFT(account, metadataUrl).send({
             from: account,
         });
-
-        // // console.log(ipfs);
-
-        // const ipfs = create({
-        //     host: "ipfs.infura.io",
-        //     port: 5001,
-        //     protocol: "https",
-        //     apiPath: "/ipfs/api/v0",
-        //     // url: "https://yoon-family.infura-ipfs.io:5001",
-        //     headers: {
-        //         authorization: auth,
-        //     },
-        // });
-
-        // const ipfs = create("https://nfura-ipfs.io");
-        // console.log(ipfs.add(image));
-        // const imageAdded = await ipfs.add(image, {
-        //     progress: (prog) => console.log(`received: ${prog}`),
-        // });
-        // console.log("hihi", imageAdded);
-        // const imageUrl = `https://ipfs.infura.io/ipfs/${imageAdded.path}`;
-
-        // const metadataJson = JSON.stringify({
-        //     data: {
-        //         name,
-        //         description,
-        //     },
-        //     image: imageUrl,
-        // });
-        // const metadataAdded = await ipfs.add(metadataJson);
-        // const metadataUrl = `https://ipfs.infura.io/ipfs/${metadataAdded.path}`;
-        // console.log(metadataUrl);
-        // // const tokenContract = await new web3.eth.Contract(
-        //     erc721Abi,
-        //     contract_addr,
-        //     {
-        //         from: account,
-        //     }
-        // );
-        // tokenContract.methods.mintNFT(account, metadataUrl).send({
-        //     from: account,
-        // });
     };
 
     useEffect(() => {
