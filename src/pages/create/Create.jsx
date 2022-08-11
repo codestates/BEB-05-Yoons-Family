@@ -1,4 +1,4 @@
-import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
+import { PlusOutlined, LoadingOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js';
 import { Button, Col, Divider, Form, Input, Row, Select, Typography, Upload, message } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -51,6 +51,7 @@ function Create({ web3, setCollapsed, account }) {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [to, setTo] = useState('');
+  const [loadings, setLoadings] = useState([]);
 
   const handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -79,7 +80,11 @@ function Create({ web3, setCollapsed, account }) {
   );
 
   const mint = async () => {
-    console.log('upload');
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[1] = true;
+      return newLoadings;
+    });
 
     const NFT_STORAGE_TOKEN =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGE4ZDBCN2IxNmZEMDAzNjA1OUY2ODA2ODBhOTY0Y0Q4RTA1Yzk1NjYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2MDE0MzgwNzIwNywibmFtZSI6IllPT04gRkFNSUxZIn0.Oc37n9p13TvckSJHSS5mU2vaqs-K0646CIFFnRoqwHE';
@@ -98,10 +103,18 @@ function Create({ web3, setCollapsed, account }) {
       from: account,
     });
 
-    console.log('BEFORE MING', account, metadataUrl);
-    tokenContract.methods.mintNFT(account, metadataUrl).send({
+    console.log('BEFORE MING', account, metadata);
+    tokenContract.methods.mintNFT(account, metadata).send({
       from: account,
     });
+
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[1] = false;
+        return newLoadings;
+      });
+    }, 10);
   };
 
   useEffect(() => {
@@ -150,18 +163,20 @@ function Create({ web3, setCollapsed, account }) {
               ]}
               beforeUpload={beforeUpload}
               onChange={handleChange}
+              maxCount={1}
             >
               {/* <div>
-                                <PlusOutlined />
-                                <div
-                                    style={{
-                                        marginTop: 8,
-                                    }}
-                                >
-                                    Upload
-                                </div>
-                            </div> */}
-              {image ? (
+                <PlusOutlined />
+                <div
+                  style={{
+                    marginTop: 8,
+                  }}
+                >
+                  Upload
+                </div>
+              </div> */}
+              {uploadButton}
+              {/* {image ? (
                 <img
                   src={image}
                   alt="avatar"
@@ -171,7 +186,7 @@ function Create({ web3, setCollapsed, account }) {
                 />
               ) : (
                 uploadButton
-              )}
+              )} */}
             </Upload>
           </Form.Item>
           <Title level={3}>Name</Title>
@@ -252,6 +267,7 @@ function Create({ web3, setCollapsed, account }) {
             <Button
               type="primary"
               size="large"
+              loading={loadings[1]}
               onClick={() => {
                 mint();
               }}
