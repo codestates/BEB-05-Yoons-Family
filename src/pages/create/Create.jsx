@@ -6,7 +6,6 @@ import {
     Divider,
     Form,
     Input,
-    notification,
     Row,
     Select,
     Typography,
@@ -99,8 +98,8 @@ function Create({ web3, setCollapsed, account }) {
         console.log(client);
 
         const metadata = await client.store({
-            name: "My sweet NFT",
-            description: "Just try to funge it. You can't do it.",
+            name: name,
+            description: description,
             image: image,
         });
 
@@ -122,50 +121,6 @@ function Create({ web3, setCollapsed, account }) {
         tokenContract.methods.mintNFT(account, metadataUrl).send({
             from: account,
         });
-
-        // const projectId = "2DAMTzddRfMe3uH3ooh1c4kTPnV";
-        // const projectSecret = "c781fb50cbe9b92db0538db9185682da";
-        // const auth =
-        //     "Basic " +
-        //     Buffer.from(projectId + ":" + projectSecret).toString("base64");
-        // const ipfs = create({
-        //     host: "ipfs.infura.io",
-        //     port: 5001,
-        //     protocol: "https",
-        //     headers: {
-        //         authorization: auth,
-        //     },
-        //     apiPath: "/ipfs/api/v0",
-        // });
-
-        // console.log(ipfs);
-
-        // const imageAdded = await ipfs.add(image);
-        // console.log("hihi", imageAdded);
-        // const imageUrl = `https://ipfs.infura.io/ipfs/${imageAdded.path}`;
-        // console.log("imageURL", imageUrl);
-
-        // const metadataJson = JSON.stringify({
-        //     data: {
-        //         name,
-        //         description,
-        //     },
-        //     image: imageUrl,
-        // });
-        // const metadataAdded = await ipfs.add(metadataJson);
-        // const metadataUrl = `https://ipfs.infura.io/ipfs/${metadataAdded.path}`;
-        // console.log(metadataUrl);
-
-        // // const ipfs = await Axios.post(
-        // //     "https://ipfs.infura.io:5001/api/v0/add",
-        // //     "asd",
-        // //     {
-        // //         headers: {
-        // //             Authorization: auth,
-        // //             "Content-Type": "multipart/form-data",
-        // //         },
-        // //     }
-        // // );
 
         // // console.log(ipfs);
 
