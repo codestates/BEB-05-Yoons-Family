@@ -5,7 +5,7 @@ import { theme } from '../../style/theme';
 
 function Section1({ collapsed, setCollapsed, account }) {
   return (
-    <Row gutter={[48, 48]} justify="center" align="middle" wrap={true}>
+    <Row gutter={[8, 8]} justify="center" align="middle" wrap={true}>
       <Col xs={24} xl={6} style={{ textAlign: 'center' }}>
         <Title>NFT Exchange</Title>
         <Explain>Unleash your creativity</Explain>

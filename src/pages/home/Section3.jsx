@@ -13,7 +13,7 @@ function Section3() {
       <Col xs={24} xl={12}>
         <Title style={{ textAlign: 'center' }}>Discover Extraordinary Collect</Title>
 
-        <Carousel autoplay style={{ maxWidth: '800px' }}>
+        <Carousel autoplay>
           {/* {new Array(4).fill(null).map((_, idx) => {
             return (
               <Card

@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 
+//메타마스크 설치 안내
 const metamaskInstallNoti = () => {
   notification.warning({
     message: 'Please Install the Metamask',
@@ -16,6 +17,7 @@ const metamaskInstallNoti = () => {
   });
 };
 
+//메타마스크 연결 필요 안내
 const loginWarningNoti = () => {
   notification.warning({
     message: 'Please Connect to Metamask',
@@ -24,6 +26,7 @@ const loginWarningNoti = () => {
   });
 };
 
+//메타마스크 연결 성공 안내
 const loginSuccessNoti = () => {
   notification.success({
     message: 'You are successfully connected Metamask',
@@ -32,4 +35,28 @@ const loginSuccessNoti = () => {
   });
 };
 
-export { metamaskInstallNoti, loginSuccessNoti, loginWarningNoti };
+//메타마스크 계정 변경 안내
+const changedAccountNoti = (accountAdress) => {
+  notification.success({
+    message: 'You are successfully changed Account',
+    description: 'Now adress is ' + accountAdress,
+    placement: 'topLeft',
+  });
+};
+
+//메타마스크 체인 변경 안내
+const changedNetworkNoti = (chainName) => {
+  notification.success({
+    message: 'You are successfully connected Network',
+    description: 'Now network is ' + chainName,
+    placement: 'topLeft',
+  });
+};
+
+export {
+  metamaskInstallNoti,
+  loginSuccessNoti,
+  loginWarningNoti,
+  changedAccountNoti,
+  changedNetworkNoti,
+};
