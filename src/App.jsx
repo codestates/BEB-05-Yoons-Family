@@ -11,6 +11,7 @@ import Footer from './components/layout/Footer';
 import { theme } from './style/theme';
 import Sidebar from './components/layout/Sidebar';
 import { useLocation } from 'react-router-dom';
+import { loginSuccessNoti, metamaskInstallNoti } from './asset/utils/notification';
 
 const { Content } = Layout;
 
@@ -44,6 +45,10 @@ function App() {
 
   //지갑 연동
   const connectWallet = async () => {
+    if (typeof window.ethereum === 'undefined') {
+      metamaskInstallNoti();
+      return;
+    }
     let accounts = await window.ethereum.request({
       method: 'eth_requestAccounts',
     });
@@ -51,12 +56,7 @@ function App() {
     setAccount(accounts[0]);
     getBalance(accounts[0]);
 
-    !account[0] &&
-      notification.success({
-        message: 'You are successfully connected Metamask',
-        description: 'Start minting your own NFTs with NFT Exchange today!',
-        placement: 'topLeft',
-      });
+    !account[0] && loginSuccessNoti();
   };
 
   //잔액조회
