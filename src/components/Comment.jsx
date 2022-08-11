@@ -19,9 +19,9 @@ const Comment = ({ footerData }) => {
       avatar={<Avatar src={footerData.avatar} alt={footerData.github_id} />}
       content={
         <div>
-          It's fun and exciting to do a project based on what we learned. It's
-          fun and exciting to do a project based on what we learned. It's fun
-          and exciting to do a project based on what we learned.
+          It's fun and exciting to do a project based on what we learned. It's fun and exciting to
+          do a project based on what we learned. It's fun and exciting to do a project based on what
+          we learned.
         </div>
       }
     />

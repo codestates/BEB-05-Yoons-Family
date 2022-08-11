@@ -125,12 +125,7 @@ function App() {
           }}
           className="site-layout-content"
         >
-          <Router
-            web3={web3}
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            account={account}
-          />
+          <Router web3={web3} collapsed={collapsed} setCollapsed={setCollapsed} account={account} />
 
           {/*  <div className="newErc721">
               <input

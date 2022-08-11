@@ -120,11 +120,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
               }
               bodyStyle={{ textAlign: 'center' }}
             >
-              <Image
-                src={NFTData.image}
-                alt={`${NFTData.name}`}
-                style={{ width: '100%' }}
-              />
+              <Image src={NFTData.image} alt={`${NFTData.name}`} style={{ width: '100%' }} />
             </Card>
           </Col>
           {/* Order Box */}
@@ -132,8 +128,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
             <Card
               title={
                 <>
-                  <ClockCircleOutlined /> Sale ends August 16, 2022 at 2:32am
-                  GMT+9
+                  <ClockCircleOutlined /> Sale ends August 16, 2022 at 2:32am GMT+9
                 </>
               }
             >
@@ -148,19 +143,10 @@ function NFTDetails({ web3, setCollapsed, account }) {
                   />
                   <Title level={2}>{NFTData.price} ETH</Title>
                 </Space>
-                <Button
-                  type="primary"
-                  size="large"
-                  style={{ width: '100%' }}
-                  onClick={onBuyNow}
-                >
+                <Button type="primary" size="large" style={{ width: '100%' }} onClick={onBuyNow}>
                   <WalletFilled /> Buy Now
                 </Button>
-                <Button
-                  size="large"
-                  style={{ width: '100%' }}
-                  onClick={onMakeOffer}
-                >
+                <Button size="large" style={{ width: '100%' }} onClick={onMakeOffer}>
                   <TagFilled /> Make offer
                 </Button>
               </Space>
@@ -192,11 +178,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
               </Panel>
             </Collapse>
             {/* Offers Box */}
-            <Collapse
-              defaultActiveKey={['1']}
-              expandIconPosition={'end'}
-              onChange={onChange}
-            >
+            <Collapse defaultActiveKey={['1']} expandIconPosition={'end'} onChange={onChange}>
               <Panel
                 header={
                   <>
@@ -222,11 +204,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
           </Col>
           {/* Description */}
           <Col flex={'1 1 50%'}>
-            <Collapse
-              defaultActiveKey={['1', '2']}
-              onChange={onChange}
-              expandIconPosition={'end'}
-            >
+            <Collapse defaultActiveKey={['1', '2']} onChange={onChange} expandIconPosition={'end'}>
               <Panel
                 header={
                   <>

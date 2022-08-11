@@ -21,11 +21,7 @@ function CollectionPreview({ collectionData }) {
       >
         <Meta
           avatar={
-            <Avatar
-              shape="square"
-              src={collectionData.collection_profile_img}
-              size="large"
-            />
+            <Avatar shape="square" src={collectionData.collection_profile_img} size="large" />
           }
           title={collectionData.collection_name}
 

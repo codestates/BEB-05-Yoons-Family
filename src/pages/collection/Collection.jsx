@@ -1,16 +1,5 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import {
-  Col,
-  Divider,
-  Layout as _Layout,
-  Menu as _Menu,
-  Row,
-  Typography,
-} from 'antd';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Col, Divider, Layout as _Layout, Menu as _Menu, Row, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -35,12 +24,8 @@ function Collection() {
   return (
     <Row justify="center" align="middle" style={{ marginTop: '-15vh' }}>
       <Col span={24}>
-        <CollentionBackgound
-          src={collectionData.collection_background_img}
-        ></CollentionBackgound>
-        <CollentionProfileImg
-          src={collectionData.collection_profile_img}
-        ></CollentionProfileImg>
+        <CollentionBackgound src={collectionData.collection_background_img}></CollentionBackgound>
+        <CollentionProfileImg src={collectionData.collection_profile_img}></CollentionProfileImg>
         <Title>{collectionData.collection_name}</Title>
         <Author>
           By{' '}
@@ -48,11 +33,7 @@ function Collection() {
             <strong>{collectionData.collection_author}</strong>
           </span>
         </Author>
-        <Paragraph
-          ellipsis={
-            ellipsis ? { rows: 2, expandable: true, symbol: 'more' } : false
-          }
-        >
+        <Paragraph ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'more' } : false}>
           {collectionData.collection_description}
         </Paragraph>
         <Divider />
@@ -97,10 +78,7 @@ function Collection() {
             {new Array(28).fill(null).map((_, idx) => {
               return (
                 <Col xs={12} xl={6} key={Symbol(idx + 1).toString()}>
-                  <NFTPreview
-                    key={Symbol(idx + 1).toString()}
-                    NFTData={NFTData}
-                  ></NFTPreview>
+                  <NFTPreview key={Symbol(idx + 1).toString()} NFTData={NFTData}></NFTPreview>
                 </Col>
               );
             })}

@@ -14,10 +14,7 @@ function Section2() {
           {NFTDataArray.map((NFTData, idx) => {
             return (
               <Col xs={12} xl={6} key={Symbol(idx + 1).toString()}>
-                <NFTPreview
-                  key={Symbol(idx + 1).toString()}
-                  NFTData={NFTData}
-                ></NFTPreview>
+                <NFTPreview key={Symbol(idx + 1).toString()} NFTData={NFTData}></NFTPreview>
               </Col>
             );
           })}

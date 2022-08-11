@@ -27,10 +27,7 @@ function HeaderComponent({ collapsed, setCollapsed }) {
         <Col flex={`0 0 11rem`}>
           <Link to="/">
             <LogoWrapper>
-              <LogoImg
-                src={require('../../asset/icons/ethereum.png')}
-                alt="logo"
-              />
+              <LogoImg src={require('../../asset/icons/ethereum.png')} alt="logo" />
               <LogoTitle> NFT Exchange</LogoTitle>
             </LogoWrapper>
           </Link>
@@ -89,10 +86,7 @@ function HeaderComponent({ collapsed, setCollapsed }) {
                 key="resources-gitHub-repository"
                 icon={<GithubOutlined />}
                 onClick={() =>
-                  window.open(
-                    'https://github.com/codestates/BEB-05-Yoons-Family',
-                    '_blank'
-                  )
+                  window.open('https://github.com/codestates/BEB-05-Yoons-Family', '_blank')
                 }
               >
                 GitHub Repository
