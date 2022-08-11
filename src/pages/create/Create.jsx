@@ -23,7 +23,7 @@ import erc721Abi from "../../erc721Abi";
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
 
 // env에서 컨트랙트 주소를 불러오지 못하는 거 같아 일단은 값을 넣어둠. 변경필요
-const contract_addr = "0x4eF8c3a3CAc68d85250bf0a6550bC5B5E6650ec0";
+const contract_addr = "0xDE119864aBb7bfdC4B0a5930286AB88ec33b1eE5";
 
 // console.log("hihi", process.env.NODE_ENV);
 console.log("hihi", contract_addr);
