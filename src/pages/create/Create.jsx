@@ -2,15 +2,13 @@ import { PlusOutlined, LoadingOutlined, PoweroffOutlined } from '@ant-design/ico
 import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js';
 import { Col, Divider, Form, Row, message } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { loginNoti } from '../../asset/utils/notification';
+import { loginWarningNoti } from '../../asset/utils/notification';
 import NotAuthorized from '../NotAuthorized';
 import erc721Abi from '../../erc721Abi';
 import * as CreateComp from '../../components/create';
 
 const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
 const NFT_STORAGE_TOKEN = process.env.REACT_APP_NFT_STORAGE_TOKEN;
-
-console.log('contract_addr', contract_addr);
 
 //temp function. You can delete this function if you don't need it
 const onFinish = (values) => {
@@ -46,7 +44,7 @@ function Create({ web3, setCollapsed, account }) {
   const [loadings, setLoadings] = useState([]);
 
   useEffect(() => {
-    !account && loginNoti();
+    !account && loginWarningNoti();
     !account && setCollapsed(false);
   }, []);
 

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Web3 from 'web3';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
 import 'antd/dist/antd.min.css';
 import Router from './router/Router';
 import { notification } from 'antd';
@@ -11,6 +11,15 @@ import Footer from './components/layout/Footer';
 import { theme } from './style/theme';
 import Sidebar from './components/layout/Sidebar';
 import { useLocation } from 'react-router-dom';
+import {
+  loginSuccessNoti,
+  loginWarningNoti,
+  metamaskInstallNoti,
+  changedAccountNoti,
+  changedNetworkNoti,
+} from './asset/utils/notification';
+import { getNetworkName } from './asset/utils/getNetworkName';
+import Web3 from 'web3';
 
 const { Content } = Layout;
 
@@ -19,12 +28,14 @@ function App() {
   //web3 연동
   const [web3, setWeb3] = useState();
   const [account, setAccount] = useState('');
+  const [balance, setbalance] = useState('');
+  const [network, setNetwork] = useState('');
+  //토큰
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
-  const [balance, setbalance] = useState('');
-
   const [collapsed, setCollapsed] = useState(true);
 
+  //web3 연결
   useEffect(() => {
     if (typeof window.ethereum !== 'undefined') {
       // window.ethereum이 있다면
@@ -37,6 +48,40 @@ function App() {
     }
   }, []);
 
+  //계정 변경
+  const handleAccountChange = (...args) => {
+    const _account = args[0][0];
+    if (args[0].length === 0) {
+      loginWarningNoti();
+    } else if (_account !== account) {
+      setAccount(_account);
+      getBalance(_account);
+      changedAccountNoti(_account);
+    }
+  };
+  useEffect(() => {
+    window.ethereum?.on('accountsChanged', handleAccountChange);
+    return () => {
+      window.ethereum?.removeListener('accountsChanged', handleAccountChange);
+    };
+  });
+
+  //네트워크 변경
+  const handleNetworkChanged = (...args) => {
+    const networkId = args[0];
+    const networkName = getNetworkName(networkId);
+    setNetwork(networkName);
+    getBalance(account);
+    changedNetworkNoti(networkName);
+  };
+
+  useEffect(() => {
+    window.ethereum?.on('networkChanged', handleNetworkChanged);
+    return () => {
+      window.ethereum?.removeListener('networkChanged', handleNetworkChanged);
+    };
+  });
+
   //페이지 이동시 사이드바 닫힘
   useEffect(() => {
     setCollapsed(true);
@@ -44,6 +89,10 @@ function App() {
 
   //지갑 연동
   const connectWallet = async () => {
+    if (typeof window.ethereum === 'undefined') {
+      metamaskInstallNoti();
+      return;
+    }
     let accounts = await window.ethereum.request({
       method: 'eth_requestAccounts',
     });
@@ -51,21 +100,14 @@ function App() {
     setAccount(accounts[0]);
     getBalance(accounts[0]);
 
-    !account[0] &&
-      notification.success({
-        message: 'You are successfully connected Metamask',
-        description: 'Start minting your own NFTs with NFT Exchange today!',
-        placement: 'topLeft',
-      });
+    !account[0] && loginSuccessNoti();
   };
 
   //잔액조회
-
   const getBalance = async (account) => {
+    //eth로 단위 변경
     let balanceWei = await web3.eth.getBalance(account);
-
     let balanceETH = await web3.utils.fromWei(balanceWei, 'ether'); //eth로 단위 변경
-
     setbalance(balanceETH);
   };
 
