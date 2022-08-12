@@ -101,7 +101,12 @@ function HeaderComponent({ collapsed, setCollapsed }) {
                 <Menu.Item key="create" onClick={() => navigate('/assets/create')}>
                   Create
                 </Menu.Item>
-                <Menu.Item key="mypage" onClick={() => {}}>
+                <Menu.Item
+                  key="mypage"
+                  onClick={() => {
+                    navigate('/mypage');
+                  }}
+                >
                   <UserOutlined />
                 </Menu.Item>
                 <Menu.Item key="wallet" onClick={() => setCollapsed(!collapsed)}>

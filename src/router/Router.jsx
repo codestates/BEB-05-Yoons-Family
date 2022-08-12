@@ -8,6 +8,7 @@ import Explore from '../pages/explore/Explore';
 import Section3 from '../pages/home/Section3';
 import Collection from '../pages/collection/Collection';
 import NFTDetails from '../pages/detail/NFTDetails';
+import Account from '../pages/account/Account';
 
 export default function Router({ web3, collapsed, setCollapsed, account }) {
   return (
@@ -29,6 +30,7 @@ export default function Router({ web3, collapsed, setCollapsed, account }) {
         path="/assets/create"
         element={<Create web3={web3} setCollapsed={setCollapsed} account={account} />}
       />
+      <Route path="/mypage" element={<Account />} />
       <Route path="/collection/:collection_key" element={<Collection />} />
       <Route
         path="/assets/ethereum/:nft_address"
