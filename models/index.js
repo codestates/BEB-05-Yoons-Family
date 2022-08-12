@@ -1,4 +1,5 @@
-const db = require("../db");
+const { default: axios } = require('axios');
+const db = require('../db');
 
 module.exports = {
   get1: (address, callback) => {
