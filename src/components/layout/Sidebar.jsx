@@ -8,7 +8,7 @@ import { Avatar, Card, Col, List as _List, message, Row, Tooltip, Typography } f
 
 const { Text } = Typography;
 
-function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
+function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance, network, netArr }) {
   return (
     <Sider
       trigger={null}
@@ -172,6 +172,28 @@ function Sidebar({ collapsed, setCollapsed, connectWallet, account, balance }) {
                   </Text>
                 </Tooltip>
               </div>
+              <Card
+                title={'Network'}
+                headStyle={{
+                  color: `${theme.soft_blue}`,
+                  display: 'block',
+                  textAlign: 'center',
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+                bodyStyle={{
+                  color: `${theme.cyan}`,
+                  textAlign: 'center',
+                  fontSize: `${theme.fs_12}`,
+                }}
+                style={{
+                  margin: '20px 0px 20px 0px',
+                  width: '100%',
+                  backgroundColor: `${theme.very_dark_blue_main}`,
+                  borderColor: `${theme.very_dark_blue_line}`,
+                }}
+              >
+                <p>{netArr[network]}</p>
+              </Card>
               <Card
                 title={'Total balance'}
                 headStyle={{

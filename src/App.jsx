@@ -12,6 +12,7 @@ import { theme } from './style/theme';
 import Sidebar from './components/layout/Sidebar';
 import { useLocation } from 'react-router-dom';
 import { loginSuccessNoti, metamaskInstallNoti } from './asset/utils/notification';
+import axios from 'axios';
 
 const { Content } = Layout;
 
@@ -23,6 +24,16 @@ function App() {
   const [newErc721Addr, setNewErc721Addr] = useState();
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
   const [balance, setbalance] = useState('');
+  const [network, setNetwork] = useState();
+
+  const netArr = {
+    1: 'ethereum mainnet',
+    2: 'morden testnet',
+    3: 'ropsten testnet',
+    4: 'rinkeby testnet',
+    5: 'goerli testnet',
+    42: 'kovan testnet',
+  };
 
   const [collapsed, setCollapsed] = useState(true);
 
@@ -57,6 +68,11 @@ function App() {
     getBalance(accounts[0]);
 
     !account[0] && loginSuccessNoti();
+
+    const networkVersion = await window.ethereum.request({
+      method: 'net_version',
+    });
+    setNetwork(networkVersion);
   };
 
   //잔액조회
@@ -68,6 +84,28 @@ function App() {
 
     setbalance(balanceETH);
   };
+
+  function saveAccount(account, balance) {
+    const data = {
+      user_account: account,
+      user_balance: balance,
+    };
+    console.log(data);
+    axios
+      .post('http://localhost:4000/connect', JSON.stringify(data), {
+        headers: { 'Content-Type': `application/json` },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    saveAccount(account, balance);
+  }, [account, balance]);
 
   //abi
   const addNewErc721Token = async () => {
@@ -115,6 +153,8 @@ function App() {
           connectWallet={connectWallet}
           account={account}
           balance={balance}
+          network={network}
+          netArr={netArr}
         />
         <Content
           style={{
