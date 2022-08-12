@@ -1,5 +1,7 @@
 # NFT Exchange
 
+![](https://user-images.githubusercontent.com/64685759/184427608-35cb621d-7608-425e-a2ff-b8f3b3094c3a.png)
+
 [![Hits](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family.svg)](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family/)
 
 <!-- Simple overview of use/purpose. -->
