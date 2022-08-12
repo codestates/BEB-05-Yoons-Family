@@ -25,6 +25,7 @@ function UploadImage({ beforeUpload, handleChange, image, uploadButton }) {
           ]}
           beforeUpload={beforeUpload}
           onChange={handleChange}
+          maxCount={1}
         >
           {/* <div>
                         <PlusOutlined />
@@ -36,7 +37,7 @@ function UploadImage({ beforeUpload, handleChange, image, uploadButton }) {
                             Upload
                         </div>
                     </div> */}
-          {image ? (
+          {/* {image ? (
             <img
               src={image}
               alt="avatar"
@@ -46,7 +47,8 @@ function UploadImage({ beforeUpload, handleChange, image, uploadButton }) {
             />
           ) : (
             uploadButton
-          )}
+          )} */}
+          {uploadButton}
         </Upload>
       </Form.Item>
     </>
