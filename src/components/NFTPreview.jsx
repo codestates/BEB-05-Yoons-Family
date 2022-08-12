@@ -21,7 +21,11 @@ function NFTpreview({ NFTData }) {
             src={NFTData.image_url}
             preview={false}
             fallback={emptyImg}
-            style={{ objectFit: 'contain', maxHeight: '100%', maxWidth: '100%' }}
+            style={{
+              maxHeight: '210px',
+              maxWidth: 'auto',
+              objectFit: 'contain',
+            }}
           />
         }
       >
