@@ -36,7 +36,7 @@ export default function Router({ web3, collapsed, setCollapsed, account }) {
       />
       <Route path="/collection/:collection_key" element={<Collection />} />
       <Route
-        path="/assets/ethereum/:nft_address"
+        path="/assets/ethereum/:asset_contract/:token_id"
         element={<NFTDetails web3={web3} setCollapsed={setCollapsed} account={account} />}
       />
     </Routes>
