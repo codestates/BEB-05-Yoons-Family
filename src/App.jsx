@@ -20,6 +20,7 @@ import {
 } from './asset/utils/notification';
 import { getNetworkName } from './asset/utils/getNetworkName';
 import Web3 from 'web3';
+import { connectAPI } from './api/connect';
 
 const { Content } = Layout;
 
@@ -35,6 +36,13 @@ function App() {
   const [erc721list, setErc721list] = useState([]); // 자신의 NFT 정보를 저장할 토큰
   const [collapsed, setCollapsed] = useState(true);
 
+  //현재 값
+  const [userInfo, setUserInfo] = useState({
+    account: '',
+    balance: '',
+    network: '',
+  });
+
   //web3 연결
   useEffect(() => {
     if (typeof window.ethereum !== 'undefined') {
@@ -47,6 +55,19 @@ function App() {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (account && balance && network) {
+      if (
+        userInfo.account !== account &&
+        userInfo.balance !== balance &&
+        userInfo.network !== network
+      ) {
+        connectAPI(account, balance, network);
+        setUserInfo({ account: account, balance: balance, network: network });
+      }
+    }
+  }, [account, balance, network]);
 
   //계정 변경
   const handleAccountChange = (...args) => {
@@ -73,6 +94,8 @@ function App() {
     setNetwork(networkName);
     getBalance(account);
     changedNetworkNoti(networkName);
+
+    // window.location.reload();
   };
 
   useEffect(() => {
@@ -97,8 +120,14 @@ function App() {
       method: 'eth_requestAccounts',
     });
 
+    const networkId = await window.ethereum.request({
+      method: 'net_version',
+    });
+    const networkName = getNetworkName(networkId);
     setAccount(accounts[0]);
     getBalance(accounts[0]);
+    setNetwork(networkName);
+    connectAPI(accounts[0], balance, networkName);
 
     !account[0] && loginSuccessNoti();
   };
@@ -108,7 +137,8 @@ function App() {
     //eth로 단위 변경
     let balanceWei = await web3.eth.getBalance(account);
     let balanceETH = await web3.utils.fromWei(balanceWei, 'ether'); //eth로 단위 변경
-    setbalance(balanceETH);
+    const balanceStr = String(balanceETH);
+    setbalance(balanceStr);
   };
 
   //abi
