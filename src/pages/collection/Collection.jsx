@@ -1,12 +1,11 @@
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Col, Divider, Layout as _Layout, Menu as _Menu, Row, Typography } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { getCollectionDatailsAPI } from '../../api/getCollectionList';
 import NFTPreview from '../../components/NFTPreview';
 import { theme } from '../../style/theme';
-import { NFTData } from '../../temp/dummyDataNFT';
-import { collectionDataTrending } from '../../temp/dummyDataTrending';
 import Notfound from '../Notfound';
 
 const { Title: _Title, Paragraph, Text } = Typography;
@@ -17,24 +16,32 @@ function Collection() {
   const location = useLocation();
 
   const [ellipsis, setEllipsis] = useState(true);
+  const [NFTList, setNFTList] = useState([]);
 
-  const collectionData = collectionDataTrending;
-  const collection_key = location.pathname.split('/')[2];
+  const getNFTList = async () => {
+    const slug = location.pathname.split('/')[2];
+    const response = await getCollectionDatailsAPI(slug);
+    console.log(response);
+    setNFTList(response);
+  };
+  useEffect(() => {
+    getNFTList();
+  }, []);
 
   return (
     <Row justify="center" align="middle" style={{ marginTop: '-15vh' }}>
       <Col span={24}>
-        <CollentionBackgound src={collectionData.collection_background_img}></CollentionBackgound>
-        <CollentionProfileImg src={collectionData.collection_profile_img}></CollentionProfileImg>
-        <Title>{collectionData.collection_name}</Title>
+        <CollentionBackgound src={NFTList[0]?.collection?.banner_image_url}></CollentionBackgound>
+        <CollentionProfileImg src={NFTList[0]?.collection?.image_url}></CollentionProfileImg>
+        <Title>{NFTList[0]?.collection?.name}</Title>
         <Author>
           By{' '}
           <span>
-            <strong>{collectionData.collection_author}</strong>
+            <strong>{NFTList[0]?.collection?.name}</strong>
           </span>
         </Author>
         <Paragraph ellipsis={ellipsis ? { rows: 2, expandable: true, symbol: 'more' } : false}>
-          {collectionData.collection_description}
+          {NFTList[0]?.collection?.description}
         </Paragraph>
         <Divider />
         <Layout>
@@ -75,7 +82,7 @@ function Collection() {
             </Menu>
           </Sider>
           <Row gutter={[16, 16]}>
-            {new Array(28).fill(null).map((_, idx) => {
+            {NFTList.map((NFTData, idx) => {
               return (
                 <Col xs={12} xl={6} key={Symbol(idx + 1).toString()}>
                   <NFTPreview key={Symbol(idx + 1).toString()} NFTData={NFTData}></NFTPreview>

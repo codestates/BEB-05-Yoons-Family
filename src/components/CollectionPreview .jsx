@@ -6,24 +6,24 @@ import { emptyImg } from '../asset/imgs/entryImg';
 
 function CollectionPreview({ collectionData }) {
   return (
-    <Link to={`/collection/${collectionData.collection_key}`}>
+    <Link to={`/collection/${collectionData.slug}`}>
       <Card
-        key={Symbol('collection').toString()}
+        key={collectionData.name}
         hoverable
         cover={
           <Image
             alt="collection-card"
-            src={collectionData.collection_banner_img}
+            src={collectionData.image_url}
             preview={false}
             fallback={emptyImg}
+            height={250}
+            style={{ objectFit: 'cover' }}
           />
         }
       >
         <Meta
-          avatar={
-            <Avatar shape="square" src={collectionData.collection_profile_img} size="large" />
-          }
-          title={collectionData.collection_name}
+          avatar={<Avatar shape="square" src={collectionData.image_url} size="large" />}
+          title={collectionData.name}
 
           //설명 부분
           // description={
