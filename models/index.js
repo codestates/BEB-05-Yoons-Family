@@ -28,13 +28,24 @@ module.exports = {
       callback(error, result);
     });
   },
-  save: (user_account, user_balance, callback) => {
-    const queryString = `INSERT INTO Users (user_account, user_balance) VALUES (?, ?)`;
-    const params = [user_account, user_balance];
+  saveAccount: (user_account, user_balance, chain, callback) => {
+    const getAccount = `SELECT user_account FROM Users WHERE user_account = "${user_account}" AND user_chain = "${chain}"`;
+    const updateAccount = `UPDATE Users SET user_account="${user_account}", user_balance="${user_balance}", user_chain="${chain}" WHERE user_account="${user_account}" AND user_chain="${chain}"`;
 
-    db.query(queryString, params, (error, result) => {
-      console.log(result);
-      callback(error, result);
+    const insertAccount = `INSERT INTO Users (user_account, user_balance, user_chain) VALUES ("${user_account}","${user_balance}" , "${chain}")`;
+
+    db.query(getAccount, (error, result) => {
+      isAccount = JSON.stringify(result);
+      console.log(isAccount);
+      if (isAccount === '[]') {
+        db.query(insertAccount, (error, result) => {
+          callback(error, result);
+        });
+      } else {
+        db.query(updateAccount, (error, result) => {
+          callback(error, result);
+        });
+      }
     });
   },
 };

@@ -5,7 +5,7 @@ CREATE TABLE NFT (
   token_owner varchar(100),
   contract_address varchar(100),
   token_description varchar(500),
-  token_price FLOAT,
+  token_price varchar(200),
   collection_no INT,
   created_at datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(token_id)
@@ -23,7 +23,7 @@ CREATE TABLE Contracts (
 CREATE TABLE History (
   history_id INT AUTO_INCREMENT,
   token_id INT,
-  history_token_price FLOAT,
+  history_token_price varchar(200),
   from_address varchar(100),
   to_address varchar(100),
   transaction_hash varchar(100),
@@ -45,10 +45,12 @@ CREATE TABLE Collections (
 );
 
 CREATE TABLE Users (
+  user_no INT AUTO_INCREMENT,
   user_account varchar(100),
-  user_balance FLOAT,
+  user_balance varchar(200),
+  user_chain varchar(100),
   created_at datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY(user_account)
+  PRIMARY KEY(user_no)
 );
 
 ALTER TABLE History ADD FOREIGN KEY (token_id) REFERENCES NFT (token_id);

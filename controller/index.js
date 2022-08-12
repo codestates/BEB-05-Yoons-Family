@@ -30,9 +30,10 @@ module.exports = {
     }
   },
   saveAccount: (req, res) => {
-    const { user_account, user_balance } = req.body;
+    const { user_account, user_balance, chain } = req.body;
     console.log(req.body);
-    models.save(user_account, user_balance, (error, result) => {
+
+    models.saveAccount(user_account, user_balance, chain, (error, result) => {
       if (error) {
         return res.status(500).send('Internal Server Error');
       } else {
@@ -90,6 +91,35 @@ module.exports = {
         .then((response) => response.data.collections);
       console.log(collections);
       return res.status(200).json(collections);
+    } else if (req.query.collection_slug != undefined) {
+      const collections = await axios
+        .get(`https://api.opensea.io/api/v1/assets?collection_slug=${req.query.collection_slug}`, {
+          headers: {
+            'x-api-key': '',
+          },
+        })
+        .then((response) => response.data.assets)
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(collections);
+      return res.status(200).json(collections);
+    }
+  },
+  findWantedNFT: async (req, res) => {
+    if (req.query.limit != undefined && req.query.collection_slug != undefined) {
+      const nftList = await axios
+        .get(
+          `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=${req.query.limit}&collection_slug=${req.query.collection_slug}`,
+          {
+            headers: {
+              'x-api-key': '',
+            },
+          }
+        )
+        .then((response) => response.data.assets);
+      console.log(nftList);
+      return res.status(200).json(nftList);
     }
   },
 };
