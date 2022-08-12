@@ -11,9 +11,8 @@ import {
   Tooltip,
   Typography,
 } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { NFTData } from '../../temp/dummyDataNFT';
 import { ReactComponent as EthereumIcon } from '../../asset/icons/ethereum-eth-logo.svg';
 import { theme } from '../../style/theme';
 import {
@@ -28,6 +27,7 @@ import {
   ZoomInOutlined,
 } from '@ant-design/icons';
 import { loginWarningNoti } from '../../asset/utils/notification';
+import { getNFTDetailAPI } from '../../api/getNFT';
 
 const { Panel } = Collapse;
 const { Title, Text, Paragraph } = Typography;
@@ -70,7 +70,7 @@ for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
     price: `${(Math.random() * 10 + 1).toFixed(3)} ETH`,
-    expiration: `${(Math.random() * 10 + 1).toFixed()} minutes ago`,
+    expiration: `${(1 + i).toFixed()} minutes ago`,
     from: `0x5A2609D698DE041B1Ba77139A4229c8a161dDd9e`,
   });
 }
@@ -82,8 +82,25 @@ const onChange = (key) => {
 function NFTDetails({ web3, setCollapsed, account }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [NFTName, setNFTName] = useState('');
+  const [NFTImg, setNFTImg] = useState('');
+  const [NFTDescription, setNFTDescription] = useState('');
+  const [NFTCollectionName, setNFTCollectionName] = useState('');
 
-  const tx_key = location.pathname.split('/')[3];
+  const tx_id = location.pathname.split('/')[3];
+  const token_id = location.pathname.split('/')[4];
+
+  const getNFTList = async () => {
+    const response = await getNFTDetailAPI(tx_id, token_id);
+    setNFTName(response.name);
+    setNFTImg(response.image_url);
+    setNFTDescription(response.description);
+    setNFTCollectionName(response.collection.name);
+  };
+
+  useEffect(() => {
+    getNFTList();
+  }, []);
 
   const onBuyNow = () => {
     !account && setCollapsed(false);
@@ -99,7 +116,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
     <Row justify="center" align="middle">
       <Col xs={24} xl={16}>
         {/* Header */}
-        <Title level={1}>{NFTData.name}</Title>
+        <Title level={1}>{NFTName}</Title>
 
         {/* // NFT image Box  */}
         <Row gutter={[8, 8]} type="flex">
@@ -119,7 +136,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
               }
               bodyStyle={{ textAlign: 'center' }}
             >
-              <Image src={NFTData.image} alt={`${NFTData.name}`} style={{ width: '100%' }} />
+              <Image src={NFTImg} alt={`${NFTName}`} style={{ width: '100%' }} />
             </Card>
           </Col>
           {/* Order Box */}
@@ -140,7 +157,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
                       width: `${theme.fs_11}`,
                     }}
                   />
-                  <Title level={2}>{NFTData.price} ETH</Title>
+                  <Title level={2}>2.543 ETH</Title>
                 </Space>
                 <Button type="primary" size="large" style={{ width: '100%' }} onClick={onBuyNow}>
                   <WalletFilled /> Buy Now
@@ -212,7 +229,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
                 }
                 key="1"
               >
-                {NFTData.description}
+                {NFTDescription}
               </Panel>
               <Panel
                 header={
@@ -227,7 +244,7 @@ function NFTDetails({ web3, setCollapsed, account }) {
               <Panel
                 header={
                   <>
-                    <ProfileOutlined /> About {NFTData.collection_name}
+                    <ProfileOutlined /> About {NFTCollectionName}
                   </>
                 }
                 key="3"

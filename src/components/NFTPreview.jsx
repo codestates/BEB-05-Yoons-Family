@@ -16,17 +16,14 @@ function NFTpreview({ NFTData }) {
         key={NFTData.token_id}
         hoverable
         cover={
-          <Image
-            alt={`nft-card ${NFTData.name}`}
-            src={NFTData.image_url}
-            preview={false}
-            fallback={emptyImg}
-            style={{
-              maxHeight: '210px',
-              maxWidth: 'auto',
-              objectFit: 'contain',
-            }}
-          />
+          <div>
+            <Image
+              alt={`nft-card ${NFTData.name}`}
+              src={NFTData.image_url ? NFTData.image_url : emptyImg}
+              preview={false}
+              fallback={emptyImg}
+            />
+          </div>
         }
       >
         <Meta

@@ -1,15 +1,14 @@
 import { Card, Col, Image, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getNFTAPI } from '../../api/getNFT';
+import { getNFTWithSlugAPI } from '../../api/getNFT';
 import NFTPreview from '../../components/NFTPreview';
 import { theme } from '../../style/theme';
-import { NFTDataArray } from '../../temp/dummyDataNFT';
 
 function Section2() {
   const [NFTList, setNFTList] = useState([]);
   const getNFTList = async () => {
-    const response = await getNFTAPI(8);
+    const response = await getNFTWithSlugAPI(8, 'meta-kongz-official');
     setNFTList(response);
   };
   useEffect(() => {
@@ -18,7 +17,7 @@ function Section2() {
 
   return (
     <Row justify="center" align="middle">
-      <Col xs={24} xl={12}>
+      <Col xs={24} xl={14}>
         <Title style={{ textAlign: 'center' }}>Get Your NFT</Title>
         <Row gutter={[16, 16]}>
           {NFTList.map((NFTData, idx) => {

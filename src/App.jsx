@@ -193,7 +193,7 @@ function App() {
             padding: '0 50px',
             display: 'flex',
             flexDirection: 'column',
-            gap: `${theme.space_10}`,
+            gap: `${theme.space_9}`,
           }}
           className="site-layout-content"
         >

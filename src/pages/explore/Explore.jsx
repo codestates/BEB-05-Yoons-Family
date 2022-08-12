@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row, Tabs, Typography } from 'antd';
 
 import CollectionList from './CollectionList';
@@ -6,6 +6,7 @@ import { collectionDataTrending } from '../../temp/dummyDataTrending';
 import { collectionDataArt } from '../../temp/dummyDataArt';
 import { theme } from '../../style/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getCollectionListAPI } from '../../api/getCollectionList';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -13,6 +14,16 @@ const { TabPane } = Tabs;
 function ExploreRouter() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [collectionList, setCollectionList] = useState([]);
+  const getNFTList = async () => {
+    const response = await getCollectionListAPI(100);
+    setCollectionList(response);
+  };
+
+  useEffect(() => {
+    getNFTList();
+  }, []);
 
   const onChange = (key) => {
     navigate(key);
@@ -34,13 +45,13 @@ function ExploreRouter() {
 
         <Tabs onChange={onChange} activeKey={location.pathname}>
           <TabPane tab="Trending" key="/assets/trending">
-            <CollectionList collectionData={collectionDataTrending} />
+            <CollectionList collectionData={collectionList} />
           </TabPane>
           <TabPane tab="Art" key="/assets/art">
-            <CollectionList collectionData={collectionDataArt} />
+            <CollectionList collectionData={collectionList} />
           </TabPane>
           <TabPane tab="Collectibles" key="/assets/collectibles">
-            <CollectionList collectionData={collectionDataTrending} />
+            <CollectionList collectionData={collectionList} />
           </TabPane>
         </Tabs>
       </Col>

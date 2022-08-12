@@ -18,8 +18,8 @@ export default function Router({ web3, collapsed, setCollapsed, account }) {
         path="/"
         element={[
           <Section1 collapsed={collapsed} setCollapsed={setCollapsed} account={account} />,
-          <Section3 />,
           <Section2 />,
+          <Section3 />,
         ]}
       />
       <Route path="/assets" element={<Explore />} />

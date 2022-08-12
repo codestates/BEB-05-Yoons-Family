@@ -1,29 +1,48 @@
 import { Avatar, Card, Carousel, Col, Image, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import CollectionPreview from '../../components/CollectionPreview ';
+import { getNFTAPI } from '../../api/getNFT';
+import { emptyImg } from '../../asset/imgs/entryImg';
 import { theme } from '../../style/theme';
-import { collectionDataArt } from '../../temp/dummyDataArt';
-import { collectionDataTrending } from '../../temp/dummyDataTrending';
 
 function Section3() {
+  const [NFTList, setNFTList] = useState([]);
+  const getNFTList = async () => {
+    const response = await getNFTAPI(4);
+    setNFTList(response);
+  };
+
+  useEffect(() => {
+    getNFTList();
+  }, []);
+
   return (
     <Row justify="center" align="middle">
-      <Col xs={24} xl={12}>
+      <Col xs={24} xl={14}>
         <Title style={{ textAlign: 'center' }}>Discover Extraordinary Collect</Title>
 
-        <Carousel autoplay>
-          {/* {new Array(4).fill(null).map((_, idx) => {
+        <Carousel autoplay style={{ overflow: 'hidden' }}>
+          {NFTList.map((NFTData, idx) => {
             return (
               <Card
-                key={Symbol('collection').toString()}
+                key={idx + 1}
                 hoverable
                 cover={
                   <Image
                     alt="collection-card"
-                    src={collectionDataTrending.collection_banner_img}
+                    src={
+                      NFTData.collection.large_image_url
+                        ? NFTData.collection.large_image_url
+                        : NFTData.collection.image_url
+                    }
                     preview={false}
+                    fallback={emptyImg}
+                    style={{
+                      maxHeight: '100%',
+                      maxWidth: 'auto',
+                      objectFit: 'cover',
+                    }}
                   />
                 }
               >
@@ -31,61 +50,16 @@ function Section3() {
                   avatar={
                     <Avatar
                       shape="square"
-                      src={collectionDataTrending.collection_profile_img}
+                      src={NFTData.collection.image_url}
                       size="large"
+                      fallback={emptyImg}
                     />
                   }
-                  title={collectionDataTrending.collection_name}
+                  title={NFTData.collection.name}
                 />
               </Card>
             );
-          })} */}
-
-          <Card
-            key={Symbol('collection').toString()}
-            hoverable
-            cover={
-              <Image
-                alt="collection-card"
-                src={collectionDataTrending.collection_banner_img}
-                preview={false}
-              />
-            }
-          >
-            <Meta
-              avatar={
-                <Avatar
-                  shape="square"
-                  src={collectionDataTrending.collection_profile_img}
-                  size="large"
-                />
-              }
-              title={collectionDataTrending.collection_name}
-            />
-          </Card>
-
-          <Card
-            key={Symbol('collection').toString()}
-            hoverable
-            cover={
-              <Image
-                alt="collection-card"
-                src={collectionDataArt.collection_banner_img}
-                preview={false}
-              />
-            }
-          >
-            <Meta
-              avatar={
-                <Avatar
-                  shape="square"
-                  src={collectionDataArt.collection_profile_img}
-                  size="large"
-                />
-              }
-              title={collectionDataArt.collection_name}
-            />
-          </Card>
+          })}
         </Carousel>
       </Col>
     </Row>
