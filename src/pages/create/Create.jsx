@@ -1,4 +1,4 @@
-import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
+import { PlusOutlined, LoadingOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js';
 import { Col, Divider, Form, Row, message } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -41,7 +41,7 @@ function Create({ web3, setCollapsed, account }) {
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [to, setTo] = useState('');
+  const [loadings, setLoadings] = useState([]);
 
   useEffect(() => {
     !account && loginWarningNoti();
@@ -76,8 +76,11 @@ function Create({ web3, setCollapsed, account }) {
 
   //민팅
   const onMint = async () => {
-    console.log('upload');
-
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[1] = true;
+      return newLoadings;
+    });
     const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
     const metadata = await client.store({
@@ -86,6 +89,8 @@ function Create({ web3, setCollapsed, account }) {
       image: image,
     });
 
+    console.log('testURL=====', metadata);
+
     const metadataUrl = `https://ipfs.io/ipfs/${metadata.data.image.pathname}`;
     console.log(metadataUrl);
 
@@ -93,10 +98,19 @@ function Create({ web3, setCollapsed, account }) {
       from: account,
     });
 
-    console.log('BEFORE MING', account, metadataUrl);
-    tokenContract.methods.mintNFT(account, metadataUrl).send({
-      from: account,
-    });
+    tokenContract.methods
+      .mintNFT(account, `https://ipfs.io/ipfs/${metadata.url.split('//')[1]}`)
+      .send({
+        from: account,
+      });
+
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[1] = false;
+        return newLoadings;
+      });
+    }, 10);
   };
 
   return !account ? (
@@ -127,7 +141,7 @@ function Create({ web3, setCollapsed, account }) {
           <CreateComp.SelectBlockchain />
           <CreateComp.InputFreezeMetadata />
           <Divider />
-          <CreateComp.ButtonMint onMint={onMint} />
+          <CreateComp.ButtonMint loading={loadings[1]} onMint={onMint} />
         </Form>
       </Col>
     </Row>
