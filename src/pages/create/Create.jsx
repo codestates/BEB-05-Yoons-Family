@@ -89,6 +89,8 @@ function Create({ web3, setCollapsed, account }) {
       image: image,
     });
 
+    console.log('testURL=====', metadata);
+
     const metadataUrl = `https://ipfs.io/ipfs/${metadata.data.image.pathname}`;
     console.log(metadataUrl);
 
@@ -96,9 +98,11 @@ function Create({ web3, setCollapsed, account }) {
       from: account,
     });
 
-    tokenContract.methods.mintNFT(account, metadata).send({
-      from: account,
-    });
+    tokenContract.methods
+      .mintNFT(account, `https://ipfs.io/ipfs/${metadata.url.split('//')[1]}`)
+      .send({
+        from: account,
+      });
 
     setTimeout(() => {
       setLoadings((prevLoadings) => {
