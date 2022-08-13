@@ -9,6 +9,7 @@ import Section3 from '../pages/home/Section3';
 import Collection from '../pages/collection/Collection';
 import NFTDetails from '../pages/detail/NFTDetails';
 import Account from '../pages/account/Account';
+import BuyNFTDetails from '../components/explore/BuyNFTDetails';
 
 export default function Router({ web3, collapsed, setCollapsed, account }) {
   return (
@@ -38,6 +39,10 @@ export default function Router({ web3, collapsed, setCollapsed, account }) {
       <Route
         path="/assets/ethereum/:asset_contract/:token_id"
         element={<NFTDetails web3={web3} setCollapsed={setCollapsed} account={account} />}
+      />
+      <Route
+        path="/assets/buy/ethereum/:asset_contract/:token_id"
+        element={<BuyNFTDetails web3={web3} setCollapsed={setCollapsed} account={account} />}
       />
     </Routes>
   );

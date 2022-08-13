@@ -25,13 +25,14 @@ function AccountRouter({ web3, setCollapsed, account }) {
     });
 
     const result = await tokenContract.methods.getNftTokens(account).call({ from: account });
+    console.log('============yoyoyoyo');
     console.log(result[0].nftTokenId);
     const metadata = await Promise.all(
       result
         .filter((res) => res.nftTokenURI.startsWith('https://'))
         .map((res) => Axios.get(res.nftTokenURI).then(({ data }) => Object.assign(data, res)))
     );
-    console.log('============', metadata);
+
     const correctMetadata = metadata
       .filter((meta) => meta.image)
       .map((meta) => {
