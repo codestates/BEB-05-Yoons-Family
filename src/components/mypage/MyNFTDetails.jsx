@@ -106,7 +106,6 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
   //   setNFTDescription(response.description);
   //   setNFTCollectionName(response.collection.name);
   // };
-
   const getgetNFTList = async () => {
     console.log('GET GET START');
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
@@ -149,11 +148,12 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    console.log(tokenContract);
-    tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
-      from: account,
-    });
-    tokenContract.methods.addToMarket(pa.tokenId, '100').send({
+    // console.log(tokenContract);
+    // tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
+    //   from: account,
+    // });
+    console.log(pa.token_id, '----------');
+    tokenContract.methods.addToMarket(pa.token_id, '100').send({
       from: account,
       gas: 210000,
     });
@@ -165,9 +165,8 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    console.log('hihihihi', tokenContract);
-    console.log(address);
-    tokenContract.methods.transferFrom(account, address, pa.tokenId).send({
+    console.log('HEHEHEHEH', address);
+    tokenContract.methods.transferFrom(account, address, pa.token_id).send({
       from: account,
       gas: 210000,
     });

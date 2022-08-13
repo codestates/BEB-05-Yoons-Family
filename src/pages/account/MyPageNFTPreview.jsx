@@ -15,10 +15,11 @@ function CollectionPreview({ collectionData, account, web3 }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    console.log(tokenContract);
-    tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
-      from: account,
-    });
+    console.log('');
+    // tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
+    //   from: account,
+    // });
+
     tokenContract.methods.addToMarket(collectionData.tokenId, '100').send({
       from: account,
       gas: 210000,
