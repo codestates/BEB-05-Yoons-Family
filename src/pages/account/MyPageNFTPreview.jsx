@@ -2,10 +2,10 @@ import { Avatar, Card, Image, Button, Space, Input } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { emptyImg } from '../asset/imgs/entryImg';
+import { emptyImg } from '../../asset/imgs/entryImg';
 import { useState } from 'react';
 
-import erc721Abi from '.././erc721Abi';
+import erc721Abi from '../../erc721Abi';
 const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 function CollectionPreview({ collectionData, account, web3 }) {
@@ -42,7 +42,10 @@ function CollectionPreview({ collectionData, account, web3 }) {
   };
 
   return (
-    <Link to={`/collection/${collectionData.slug}`}>
+    <Link
+      to={`/assets/mypage/ethereum/${contract_addr}/${collectionData.tokenId}`}
+      state={{ name: collectionData.collection_name }}
+    >
       <Card
         key={collectionData.name}
         hoverable
@@ -64,33 +67,6 @@ function CollectionPreview({ collectionData, account, web3 }) {
           title={collectionData.collection_name}
           tokenId={collectionData.tokenId}
         />
-        <br />
-        <Space style={{ width: '100%' }}>
-          <Button
-            type="primary"
-            size="large"
-            onClick={() => {
-              addToMaket();
-            }}
-          >
-            마켓에 등록
-          </Button>
-          <Input
-            placeholder="선물 받는 계정"
-            onChange={(e) => {
-              setAddress(e.target.value);
-            }}
-          />
-          <Button
-            type="primary"
-            size="large"
-            onClick={() => {
-              transfer();
-            }}
-          >
-            선물하기
-          </Button>
-        </Space>
       </Card>
     </Link>
   );

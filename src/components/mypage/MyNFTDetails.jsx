@@ -10,6 +10,7 @@ import {
   Table,
   Tooltip,
   Typography,
+  Input,
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -83,7 +84,7 @@ const onChange = (key) => {
   console.log(key);
 };
 
-function BuyNFTDetails({ web3, setCollapsed, account, name }) {
+function MyNFTDetails({ web3, setCollapsed, account, name }) {
   const navigate = useNavigate();
   const location = useLocation();
   const pa = useParams();
@@ -111,7 +112,7 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    const result = await tokenContract.methods.getMarketList().call({ from: account });
+    const result = await tokenContract.methods.getNftTokens(account).call({ from: account });
 
     const metadata = await Promise.all(
       result
@@ -129,6 +130,8 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
         };
       });
 
+    console.log(correctMetadata[0].nft_name);
+
     setNFTName(correctMetadata[0].nft_name);
     setNFTImg(correctMetadata[0].nft_img);
     setNFTDescription(correctMetadata[0].nft_desc);
@@ -138,24 +141,36 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
     getgetNFTList();
   }, [account]);
 
-  const onBuyNow = async () => {
+  const [address, setAddress] = useState('');
+
+  const onMakeOffer = async () => {
     !account && setCollapsed(false);
     !account && loginWarningNoti();
-
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-
-    tokenContract.methods.buyNft(pa.token_id).send({
+    console.log(tokenContract);
+    tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
       from: account,
-      value: 100,
-      gas: 250000,
+    });
+    tokenContract.methods.addToMarket(pa.tokenId, '100').send({
+      from: account,
+      gas: 210000,
     });
   };
 
-  const onMakeOffer = () => {
+  const onSendGift = async () => {
     !account && setCollapsed(false);
     !account && loginWarningNoti();
+    const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
+      from: account,
+    });
+    console.log('hihihihi', tokenContract);
+    console.log(address);
+    tokenContract.methods.transferFrom(account, address, pa.tokenId).send({
+      from: account,
+      gas: 210000,
+    });
   };
 
   return (
@@ -205,12 +220,18 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
                   />
                   <Title level={2}>100 Wei</Title>
                 </Space>
-                <Button type="primary" size="large" style={{ width: '100%' }} onClick={onBuyNow}>
-                  <WalletFilled /> Buy Now
+                <Input
+                  placeholder="선물 받는 계정"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                />
+                <Button type="primary" size="large" style={{ width: '100%' }} onClick={onSendGift}>
+                  <WalletFilled /> 선물하기
                 </Button>
-                {/* <Button size="large" style={{ width: '100%' }} onClick={onMakeOffer}>
+                <Button size="large" style={{ width: '100%' }} onClick={onMakeOffer}>
                   <TagFilled /> Make offer
-                </Button> */}
+                </Button>
               </Space>
             </Card>
             {/* Price Box */}
@@ -315,4 +336,4 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
   );
 }
 
-export default BuyNFTDetails;
+export default MyNFTDetails;

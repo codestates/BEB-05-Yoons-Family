@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getCollectionListAPI } from '../../api/getCollectionList';
 import erc721Abi from '../../erc721Abi';
 import Axios from 'axios';
-import MarketNFTList from '../account/MarketNFTList';
+import MarketNFTList from './MarketNFTList';
 
 const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
 
@@ -87,7 +87,6 @@ function ExploreRouter({ web3, account }) {
             <MarketNFTList web3={web3} account={account} collectionData={imageList} />
           </TabPane>
           <TabPane tab="Collectibles" key="/assets/collectibles">
-            {/* <MarketNFTList web3={web3} account={account} collectionData={imageList} /> */}
             <CollectionList collectionData={collectionDataTrending} />
           </TabPane>
         </Tabs>

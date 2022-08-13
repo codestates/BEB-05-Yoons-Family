@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
-import MarketPreview from '../../components/explore/MarketPreview';
+import MarketPreview from '../account/MarketPreview';
 
 function MarketNFTList({ collectionData, account, web3 }) {
   useEffect(() => {}, [collectionData]);

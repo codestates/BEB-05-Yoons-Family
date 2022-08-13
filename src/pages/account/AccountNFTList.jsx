@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { useEffect } from 'react';
-import CollectionPreview from '../../components/CollectionPreview ';
+import MyPageNFTPreview from './MyPageNFTPreview';
 
 function AccountNFTList({ collectionData, web3, account }) {
   useEffect(() => {}, [collectionData]);
@@ -9,12 +9,12 @@ function AccountNFTList({ collectionData, web3, account }) {
       {collectionData.map((_, idx) => {
         return (
           <Col xs={12} xl={6} key={Symbol(idx + 1).toString()}>
-            <CollectionPreview
+            <MyPageNFTPreview
               key={Symbol(idx + 1).toString()}
               collectionData={_}
               web3={web3}
               account={account}
-            ></CollectionPreview>
+            ></MyPageNFTPreview>
           </Col>
         );
       })}

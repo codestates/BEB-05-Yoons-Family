@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import CollectionPreview from '../../components/CollectionPreview ';
+import CollectionPreview from '../../components/CollectionPreview';
 
 function CollectionList({ collectionData }) {
   return (
