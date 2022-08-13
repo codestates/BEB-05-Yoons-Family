@@ -23,7 +23,7 @@ export default function Router({ web3, collapsed, setCollapsed, account }) {
         ]}
       />
       <Route path="/assets" element={<Explore />} />
-      <Route path="/assets/trending" element={<Explore />} />
+      <Route path="/assets/trending" element={<Explore web3={web3} account={account} />} />
       <Route path="/assets/art" element={<Explore />} />
       <Route path="/assets/collectibles" element={<Explore />} />
       <Route
