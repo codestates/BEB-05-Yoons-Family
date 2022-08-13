@@ -1,7 +1,21 @@
-# NFT Exchange
 
 [![Hits](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family.svg)](https://hits.sh/github.com/codestates/BEB-05-Yoons-Family/)
 
+# NFT Exchange
+![](https://user-images.githubusercontent.com/64685759/184427608-35cb621d-7608-425e-a2ff-b8f3b3094c3a.png)
+
+## Description
+
+<!-- An in-depth paragraph about your project and overview of use. -->
+
+You can mint, trade, and collect NFTs on NFT Exchange.<br/>
+
+NFT Exchange is an NFT marketplace that’s built on the Ethereum blockchain. It lets creators mint their NFTs for a low price and makes it easy for you to sell or auction your works. <br/>
+On NFT Exchange, a variety of users, like artist and photographer, can create, distribute, purchase, sell, and trade their digital assets. The platform allows creators to use smart contracts on the blockchain so they can create digital assets even without knowing how to code.<br/>
+
+Before you can fully utilize NFT Exchange, you need to purchase Ethereum first from exchanges like Upbit, Bithumb and Binance. You then have to connect your wallet, where you can store your digital assets and cryptocurrency, to NFT Exchange to facilitate all of your marketplace transactions. NFT Exchange supports the MetaMask wallet.
+
+<br/>
 <!-- Simple overview of use/purpose. -->
 
 ![](https://user-images.githubusercontent.com/64685759/184424705-a907f219-6525-4a7e-b792-ace6f8f013c2.png)
@@ -20,11 +34,7 @@
 
 You can view NFT from a collection
 
-## Description
 
-<!-- An in-depth paragraph about your project and overview of use. -->
-
-You can mint, trade, and collect NFTs in this website.
 
 ## Getting Started
 

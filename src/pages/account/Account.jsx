@@ -25,13 +25,14 @@ function AccountRouter({ web3, setCollapsed, account }) {
     });
 
     const result = await tokenContract.methods.getNftTokens(account).call({ from: account });
-    console.log(result);
-    console.log('==================');
+    console.log('============yoyoyoyo');
+    console.log(result[0].nftTokenId);
     const metadata = await Promise.all(
       result
         .filter((res) => res.nftTokenURI.startsWith('https://'))
-        .map((res) => Axios.get(res.nftTokenURI).then(({ data }) => data))
+        .map((res) => Axios.get(res.nftTokenURI).then(({ data }) => Object.assign(data, res)))
     );
+
     const correctMetadata = metadata
       .filter((meta) => meta.image)
       .map((meta) => {
@@ -44,6 +45,7 @@ function AccountRouter({ web3, setCollapsed, account }) {
           // collection_background_img:
           //   'https://lh3.googleusercontent.com/BKe5JQV60t_ExHygABrea_2-ZrDTanAZng6sGePzffYJHb7OdTw-G8JqTcOqRzYcAZQIHeZbhSbgoYv6ionrwxkFU6Wb9TKdwUWK-g=h600',
           collection_banner_img: `https://ipfs.io/ipfs/${meta.image.split('//')[1]}`,
+          tokenId: meta.nftTokenId,
         };
       });
     setImageList(correctMetadata);
