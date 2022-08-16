@@ -88,30 +88,22 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
   const navigate = useNavigate();
   const location = useLocation();
   const pa = useParams();
-  console.log(name);
-  console.log('location', location);
-  console.log('pa', pa.asset_contract, pa.token_id);
+
   const [NFTName, setNFTName] = useState('');
   const [NFTImg, setNFTImg] = useState('');
   const [NFTDescription, setNFTDescription] = useState('');
   const [NFTCollectionName, setNFTCollectionName] = useState('');
+  const [currentPrice, setCurrentPrice] = useState('0');
 
-  // const tx_id = location.pathname.split('/')[4];
-  // const token_id = location.pathname.split('/')[5];
-
-  // const getNFTList = async () => {
-  //   const response = await getNFTDetailAPI(tx_id, token_id);
-  //   setNFTName(response.name);
-  //   setNFTImg(response.image_url);
-  //   setNFTDescription(response.description);
-  //   setNFTCollectionName(response.collection.name);
-  // };
   const getgetNFTList = async () => {
     console.log('GET GET START');
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
     const result = await tokenContract.methods.getNftTokens(account).call({ from: account });
+
+    const result2 = await tokenContract.methods.getMarketList().call();
+    setCurrentPrice(result2[pa.token_id - 1].price);
 
     const metadata = await Promise.all(
       result
@@ -149,10 +141,7 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    // console.log(tokenContract);
-    // tokenContract.methods.setApprovalForAll(contract_addr, 'true').send({
-    //   from: account,
-    // });
+
     console.log(pa.token_id, '----------');
     tokenContract.methods.addToMarket(pa.token_id, price).send({
       from: account,
@@ -218,7 +207,7 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
                       width: `${theme.fs_11}`,
                     }}
                   />
-                  <Title level={2}>100 Wei</Title>
+                  <Title level={2}>{currentPrice} Wei</Title>
                 </Space>
                 <Input
                   placeholder="선물 받는 계정"

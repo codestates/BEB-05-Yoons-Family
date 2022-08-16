@@ -31,8 +31,6 @@ import erc721Abi from '../../erc721Abi';
 import Axios from 'axios';
 const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
 
-// import { getNFTDetailAPI } from '../../api/getNFT';
-
 const { Panel } = Collapse;
 const { Title, Text, Paragraph } = Typography;
 
@@ -87,33 +85,21 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
   const navigate = useNavigate();
   const location = useLocation();
   const pa = useParams();
-  console.log(name);
-  console.log('location', location);
-  console.log('pa', pa.asset_contract, pa.token_id);
   const [NFTName, setNFTName] = useState('');
   const [NFTImg, setNFTImg] = useState('');
   const [NFTDescription, setNFTDescription] = useState('');
   const [NFTCollectionName, setNFTCollectionName] = useState('');
-  const [price, setPrice] = useState('120');
-
-  // const tx_id = location.pathname.split('/')[4];
-  // const token_id = location.pathname.split('/')[5];
-
-  // const getNFTList = async () => {
-  //   const response = await getNFTDetailAPI(tx_id, token_id);
-  //   setNFTName(response.name);
-  //   setNFTImg(response.image_url);
-  //   setNFTDescription(response.description);
-  //   setNFTCollectionName(response.collection.name);
-  // };
+  const [price, setPrice] = useState('');
 
   const getgetNFTList = async () => {
-    console.log('GET GET START');
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
+
     const result = await tokenContract.methods.getMarketList().call();
-    setPrice(result[pa.token_id - 1].price);
+    console.log('1111', pa.token_id);
+    const filteredResult = result.filter((res) => res.nftTokenId === pa.token_id);
+    setPrice(filteredResult[0].price);
 
     const metadata = await Promise.all(
       result
@@ -150,7 +136,7 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
 
     tokenContract.methods.buyNft(pa.token_id).send({
       from: account,
-      value: 100,
+      value: price,
       gas: 250000,
     });
   };
