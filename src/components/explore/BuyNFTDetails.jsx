@@ -94,6 +94,7 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
   const [NFTImg, setNFTImg] = useState('');
   const [NFTDescription, setNFTDescription] = useState('');
   const [NFTCollectionName, setNFTCollectionName] = useState('');
+  const [price, setPrice] = useState('120');
 
   // const tx_id = location.pathname.split('/')[4];
   // const token_id = location.pathname.split('/')[5];
@@ -111,7 +112,8 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
     const tokenContract = await new web3.eth.Contract(erc721Abi, contract_addr, {
       from: account,
     });
-    const result = await tokenContract.methods.getMarketList().call({ from: account });
+    const result = await tokenContract.methods.getMarketList().call();
+    setPrice(result[pa.token_id - 1].price);
 
     const metadata = await Promise.all(
       result
@@ -203,7 +205,7 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
                       width: `${theme.fs_11}`,
                     }}
                   />
-                  <Title level={2}>100 Wei</Title>
+                  <Title level={2}>{price} Wei</Title>
                 </Space>
                 <Button type="primary" size="large" style={{ width: '100%' }} onClick={onBuyNow}>
                   <WalletFilled /> Buy Now

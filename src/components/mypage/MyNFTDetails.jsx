@@ -141,6 +141,7 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
   }, [account]);
 
   const [address, setAddress] = useState('');
+  const [price, setPrice] = useState('');
 
   const onMakeOffer = async () => {
     !account && setCollapsed(false);
@@ -153,7 +154,7 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
     //   from: account,
     // });
     console.log(pa.token_id, '----------');
-    tokenContract.methods.addToMarket(pa.token_id, '100').send({
+    tokenContract.methods.addToMarket(pa.token_id, price).send({
       from: account,
       gas: 210000,
     });
@@ -228,6 +229,12 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
                 <Button type="primary" size="large" style={{ width: '100%' }} onClick={onSendGift}>
                   <WalletFilled /> 선물하기
                 </Button>
+                <Input
+                  placeholder="판매하길 원하는 가격을 입력해주세요."
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
+                />
                 <Button size="large" style={{ width: '100%' }} onClick={onMakeOffer}>
                   <TagFilled /> Make offer
                 </Button>

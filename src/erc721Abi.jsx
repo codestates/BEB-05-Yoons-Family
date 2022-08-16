@@ -351,6 +351,11 @@ let erc721Abi = [
             name: 'nftTokenURI',
             type: 'string',
           },
+          {
+            internalType: 'uint256',
+            name: 'price',
+            type: 'uint256',
+          },
         ],
         internalType: 'struct nftExchange.NftTokenData[]',
         name: '',
@@ -400,6 +405,11 @@ let erc721Abi = [
             internalType: 'string',
             name: 'nftTokenURI',
             type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'price',
+            type: 'uint256',
           },
         ],
         internalType: 'struct nftExchange.NftTokenData[]',
