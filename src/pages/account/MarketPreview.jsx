@@ -28,9 +28,7 @@ function MarketPreview({ collectionData, account, web3 }) {
         }
       >
         <Meta
-          avatar={
-            <Avatar shape="square" src={collectionData.collection_profile_img} size="large" />
-          }
+          // avatar={<Avatar shape="square" src={collectionData.collection_banner_img} size="large" />}
           title={collectionData.collection_name}
         />
       </Card>

@@ -75,14 +75,14 @@ function HeaderComponent({ collapsed, setCollapsed }) {
                   <Menu.Item
                     key="stats-rankings"
                     icon={<RiseOutlined />}
-                    onClick={() => alert('coming soon...')}
+                    onClick={() => window.open('https://opensea.io/rankings', '_blank')}
                   >
                     Rankings
                   </Menu.Item>
                   <Menu.Item
                     key="stats-activity"
                     icon={<SlidersOutlined />}
-                    onClick={() => alert('coming soon...')}
+                    onClick={() => window.open('https://opensea.io/activity', '_blank')}
                   >
                     Activity
                   </Menu.Item>
