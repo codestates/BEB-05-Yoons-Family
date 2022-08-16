@@ -61,15 +61,15 @@ function HeaderComponent({ collapsed, setCollapsed }) {
                     icon={<HighlightOutlined />}
                     onClick={() => navigate('/assets/art')}
                   >
-                    Art
+                    only NFT Exchange
                   </Menu.Item>
-                  <Menu.Item
+                  {/* <Menu.Item
                     key="explore-collectibles"
                     icon={<BankOutlined />}
                     onClick={() => navigate('/assets/collectibles')}
                   >
                     Collectibles
-                  </Menu.Item>
+                  </Menu.Item> */}
                 </Menu.SubMenu>
                 <Menu.SubMenu key="stats" title="Stats">
                   <Menu.Item

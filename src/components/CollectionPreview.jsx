@@ -49,7 +49,11 @@ function CollectionPreview({ collectionData, account, web3 }) {
         cover={
           <Image
             alt="collection-card"
-            src={collectionData.collection_banner_img}
+            src={
+              collectionData.banner_image_url
+                ? collectionData.banner_image_url
+                : collectionData.image_url
+            }
             preview={false}
             fallback={emptyImg}
             height={250}
@@ -58,15 +62,13 @@ function CollectionPreview({ collectionData, account, web3 }) {
         }
       >
         <Meta
-          avatar={
-            <Avatar shape="square" src={collectionData.collection_profile_img} size="large" />
-          }
-          title={collectionData.collection_name}
-          tokenId={collectionData.tokenId}
+          avatar={<Avatar shape="square" src={collectionData.image_url} size="large" />}
+          title={collectionData.name}
+          // tokenId={collectionData.tokenId}
         />
-        <br />
-        <Space style={{ width: '100%' }}>
-          {/* <Button
+        {/* <br />
+        <Space style={{ width: '100%' }}> */}
+        {/* <Button
             type="primary"
             size="large"
             onClick={() => {
@@ -75,7 +77,7 @@ function CollectionPreview({ collectionData, account, web3 }) {
           >
             마켓에 등록
           </Button> */}
-          {/* <Input
+        {/* <Input
             placeholder="선물 받는 계정"
             onChange={(e) => {
               setAddress(e.target.value);
@@ -90,7 +92,7 @@ function CollectionPreview({ collectionData, account, web3 }) {
           >
             선물하기
           </Button> */}
-        </Space>
+        {/* </Space> */}
       </Card>
     </Link>
   );

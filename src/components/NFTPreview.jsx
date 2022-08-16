@@ -22,6 +22,7 @@ function NFTpreview({ NFTData }) {
               src={NFTData.image_url ? NFTData.image_url : emptyImg}
               preview={false}
               fallback={emptyImg}
+              style={{ justifyContent: 'center' }}
             />
           </div>
         }

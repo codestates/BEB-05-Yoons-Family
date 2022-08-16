@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row, Tabs, Typography } from 'antd';
 
 import CollectionList from './CollectionList';
-import { collectionDataTrending } from '../../temp/dummyDataTrending';
-import { collectionDataArt } from '../../temp/dummyDataArt';
 import { theme } from '../../style/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getCollectionListAPI } from '../../api/getCollectionList';
@@ -28,8 +26,6 @@ function ExploreRouter({ web3, account }) {
     });
 
     const result = await tokenContract.methods.getMarketList().call();
-    console.log(result);
-    console.log('==================');
     const metadata = await Promise.all(
       result
         .filter((res) => res.nftTokenURI.startsWith('https://'))
@@ -60,6 +56,16 @@ function ExploreRouter({ web3, account }) {
     getNFT();
   }, [account]);
 
+  //기존 로직
+  const getNFTList = async () => {
+    const response = await getCollectionListAPI(100);
+    setCollectionList(response);
+  };
+
+  useEffect(() => {
+    getNFTList();
+  }, []);
+
   const onChange = (key) => {
     navigate(key);
   };
@@ -79,19 +85,18 @@ function ExploreRouter({ web3, account }) {
         </Title>
 
         <Tabs onChange={onChange} activeKey={location.pathname}>
-          <TabPane tab="Trending" key="/assets/trending">
-            {/* <CollectionList collectionData={imageList} /> */}
+          <TabPane tab="All" key="/assets/trending">
+            <CollectionList collectionData={collectionList} />
+            {/* <MarketNFTList web3={web3} account={account} collectionData={imageList} /> */}
+          </TabPane>
+          <TabPane tab="NFT Exchange" key="/assets/art">
             <MarketNFTList web3={web3} account={account} collectionData={imageList} />
           </TabPane>
-          <TabPane tab="Art" key="/assets/art">
-            <MarketNFTList web3={web3} account={account} collectionData={imageList} />
-          </TabPane>
-          <TabPane tab="Collectibles" key="/assets/collectibles">
-            <CollectionList collectionData={collectionDataTrending} />
-          </TabPane>
+          {/* <TabPane tab="Collectibles" key="/assets/collectibles">
+            <CollectionList collectionData={collectionList} />
+          </TabPane> */}
         </Tabs>
       </Col>
-      s
     </Row>
   );
 }
