@@ -89,7 +89,7 @@ function ExploreRouter({ web3, account }) {
             <CollectionList collectionData={collectionList} />
             {/* <MarketNFTList web3={web3} account={account} collectionData={imageList} /> */}
           </TabPane>
-          <TabPane tab="NFT Exchange" key="/assets/art">
+          <TabPane tab="NFT Exchange NFTs" key="/assets/art">
             <MarketNFTList web3={web3} account={account} collectionData={imageList} />
           </TabPane>
           {/* <TabPane tab="Collectibles" key="/assets/collectibles">
