@@ -5,13 +5,19 @@ import { theme } from '../../style/theme';
 
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
 
-function InputSupply() {
+function InputSupply({ setSupply }) {
   return (
     <>
       <Title level={3}>Supply</Title>
       <Paragraph>The number of items that can be minted. No gas cost to you!</Paragraph>
       <Form.Item name={'supply'}>
-        <Input size="large" defaultValue={'1'} />
+        <Input
+          size="large"
+          defaultValue={'1'}
+          onChange={(e) => {
+            setSupply(e.target.value);
+          }}
+        />
       </Form.Item>
     </>
   );

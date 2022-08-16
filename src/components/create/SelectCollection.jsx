@@ -5,13 +5,19 @@ import { theme } from '../../style/theme';
 
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
 
-function SelectCollection() {
+function SelectCollection({ setCollection }) {
   return (
     <>
       <Title level={3}>Collection</Title>
       <Paragraph>This is the collection where your item will appear.</Paragraph>
       <Form.Item name={'collection'}>
-        <Select initialvalues={'crypto-punk'} size="large">
+        <Select
+          initialvalues={'crypto-punk'}
+          size="large"
+          onSelect={(e) => {
+            setCollection(e);
+          }}
+        >
           <Select.Option value="crypto-punk">Crypto Punk</Select.Option>
           <Select.Option value="colne-x">Clone X</Select.Option>
         </Select>

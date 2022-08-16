@@ -40,7 +40,10 @@ function Create({ web3, setCollapsed, account }) {
   const [isLoading, setLoading] = useState(false);
   const [image, setImage] = useState();
   const [name, setName] = useState();
+  const [externalLink, setExternalLink] = useState();
   const [description, setDescription] = useState();
+  const [collection, setCollection] = useState();
+  const [supply, setSupply] = useState('1');
   const [loadings, setLoadings] = useState([]);
 
   useEffect(() => {
@@ -85,7 +88,11 @@ function Create({ web3, setCollapsed, account }) {
 
     const metadata = await client.store({
       name: name,
+      external_link: externalLink,
       description: description,
+      collection: collection,
+      blockchain: 'Ethereum',
+      supply: supply,
       image: image,
     });
 
@@ -134,10 +141,10 @@ function Create({ web3, setCollapsed, account }) {
             uploadButton={uploadButton}
           />
           <CreateComp.InputName setName={setName} />
-          <CreateComp.InputExternalLink />
+          <CreateComp.InputExternalLink setExternalLink={setExternalLink} />
           <CreateComp.InputDesctiption setDescription={setDescription} />
-          <CreateComp.SelectCollection />
-          <CreateComp.InputSupply />
+          <CreateComp.SelectCollection setCollection={setCollection} />
+          <CreateComp.InputSupply setSupply={setSupply} />
           <CreateComp.SelectBlockchain />
           <CreateComp.InputFreezeMetadata />
           <Divider />

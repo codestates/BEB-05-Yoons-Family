@@ -5,7 +5,7 @@ import { theme } from '../../style/theme';
 
 const { Title: _Title, Paragraph: _Paragraph } = Typography;
 
-function InputExternalLink() {
+function InputExternalLink({ setExternalLink }) {
   return (
     <>
       <Title level={3}>External link</Title>
@@ -14,7 +14,13 @@ function InputExternalLink() {
         click to learn more about it. You are welcome to link to your own webpage with more details.
       </Paragraph>
       <Form.Item name={'external-link'}>
-        <Input placeholder="http://yoursite.io/item/123" size="large" />
+        <Input
+          placeholder="http://yoursite.io/item/123"
+          size="large"
+          onChange={(e) => {
+            setExternalLink(e.target.value);
+          }}
+        />
       </Form.Item>
     </>
   );
