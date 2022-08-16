@@ -97,7 +97,6 @@ function BuyNFTDetails({ web3, setCollapsed, account, name }) {
     });
 
     const result = await tokenContract.methods.getMarketList().call();
-    console.log('1111', pa.token_id);
     const filteredResult = result.filter((res) => res.nftTokenId === pa.token_id);
     setPrice(filteredResult[0].price);
 

@@ -103,7 +103,8 @@ function MyNFTDetails({ web3, setCollapsed, account, name }) {
     const result = await tokenContract.methods.getNftTokens(account).call({ from: account });
 
     const result2 = await tokenContract.methods.getMarketList().call();
-    setCurrentPrice(result2[pa.token_id - 1].price);
+    const filteredResult_2 = result2.filter((res) => res.nftTokenId === pa.token_id);
+    if (currentPrice > 0) setCurrentPrice(filteredResult_2[0].price);
 
     const metadata = await Promise.all(
       result
